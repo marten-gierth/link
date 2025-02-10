@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('assets/fonts/playfair-display-v37-latin-regular.woff2') format('woff2'),
+    url('assets/fonts/playfair-display-v37-latin-regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 :root {
     --color-text: #ffffff;
     --color-icons: #F5DEB3;
@@ -41,9 +49,8 @@ h1 {
     color: var(--color-text);
     text-align: center;
     font-size: 4rem;
-    font-family: "Playfair Display";
-    font-weight: 700;
-
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
 }
 
 .socialIconsContainer {
