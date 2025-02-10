@@ -4,9 +4,8 @@
 
 @font-face {
     font-family: 'Playfair Display';
-    src: url('assets/fonts/playfair-display-v37-latin-regular.woff2') format('woff2'),
-    url('assets/fonts/playfair-display-v37-latin-regular.woff') format('woff');
-    font-weight: 400;
+    src: url('assets/fonts/playfair-display-latin-ext-700-normal.ttf') format('truetype');
+    font-weight: 700;
     font-style: normal;
 }
 
@@ -50,7 +49,7 @@ h1 {
     text-align: center;
     font-size: 4rem;
     font-family: 'Playfair Display', serif;
-    font-weight: 400;
+    font-weight: 700;
 }
 
 .socialIconsContainer {
