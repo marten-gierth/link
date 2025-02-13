@@ -12,7 +12,6 @@ body, html {
     overflow: hidden;
 }
 
-
 h1 {
     position: relative;
     text-align: center;
@@ -27,7 +26,6 @@ h1 {
 
 .main {
     padding-top: Calc(50vh - 10rem);
-
 }
 
 .background {

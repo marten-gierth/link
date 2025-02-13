@@ -3,6 +3,7 @@ import SocialIcons from '../components/SocialIcons.jsx';
 import '../styles/global.css';
 import '../styles/index.css';
 import Head from "../components/Head.astro";
+import BubbleText from "../components/BubbleText";
 ---
 
 <html lang="en">
@@ -12,7 +13,7 @@ import Head from "../components/Head.astro";
 <body>
 <div class="background"></div>
 <div class="main">
-    <h1>Moin, i am Marten</h1>
+    <BubbleText client:load />
     <div class="socialIconsContainer">
         <SocialIcons/>
     </div>

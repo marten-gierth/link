@@ -6,10 +6,12 @@ interface Props {
     image?: string;
 }
 
-const { title = "Marten Gierth | Link Page",
+const {
+    title = "Marten Gierth | Link Page",
     description = "Welcome to my link page. Here you'll find links to my social media channels",
     url = "https://mgierth.de",
-    image = "/assets/gradient.jpg" } = Astro.props;
+    image = "/assets/gradient.jpg"
+} = Astro.props;
 ---
 
 <head>
@@ -17,42 +19,44 @@ const { title = "Marten Gierth | Link Page",
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width"/>
     <meta name="generator" content={Astro.generator}/>
-    <meta name="robots" content="index, follow" />
-    <meta http-equiv="Pragma" content="cache" />
-    <meta name="revisit-after" content="2 days" />
-    <meta name="audience" content="all" />
-    <meta http-equiv="content-language" content="de" />
-    <meta name="language" content="de" />
-    <meta name="author" content="Marten Gierth" />
-    <meta name="copyright" content="Marten Gierth" />
-    <meta name="page-type" content="Personal Website" />
-    <meta name="keywords" content="Marten Gierth, Marten Gierth Dresden, MoinMarten, moin.marten, Marten Gierth Portfolio" />
-    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow"/>
+    <meta http-equiv="Pragma" content="cache"/>
+    <meta name="revisit-after" content="2 days"/>
+    <meta name="audience" content="all"/>
+    <meta http-equiv="content-language" content="de"/>
+    <meta name="language" content="de"/>
+    <meta name="author" content="Marten Gierth"/>
+    <meta name="copyright" content="Marten Gierth"/>
+    <meta name="page-type" content="Personal Website"/>
+    <meta name="keywords"
+          content="Marten Gierth, Marten Gierth Dresden, MoinMarten, moin.marten, Marten Gierth Portfolio"/>
+    <meta name="description" content={description}/>
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    <meta property="og:url" content={url} />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Marten Gierth" />
+    <meta property="og:title" content={title}/>
+    <meta property="og:description" content={description}/>
+    <meta property="og:image" content={image}/>
+    <meta property="og:url" content={url}/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Marten Gierth"/>
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content={title}/>
+    <meta name="twitter:description" content={description}/>
+    <meta name="twitter:image" content={image}/>
 
     <!-- Canonical Link -->
-    <link rel="canonical" href={url} />
+    <link rel="canonical" href={url}/>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png"/>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
-        {JSON.stringify({
+        {
+            JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Marten Gierth",
