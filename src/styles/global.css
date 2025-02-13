@@ -10,55 +10,27 @@
 }
 
 :root {
-    --color-text: #ffffff;
+    --color-text: rgba(0, 0, 0, 0.8);
     --color-icons: #F5DEB3;
 }
 
-.icon-large {
-    font-size: 4rem;
-    color: var(--color-icons);
-}
-
-.class a {
-    margin: 1rem;
-}
 
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
-    overflow: hidden;
 }
 
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/assets/gradient.avif');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-}
 
 h1 {
-    position: relative;
     color: var(--color-text);
-    text-align: center;
     font-size: 4rem;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
 }
 
-.socialIconsContainer {
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.main {
-    padding-top: Calc(50vh - 10rem);
-
+<p> {
+    color: var(--color-text);
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
 }
