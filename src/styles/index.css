@@ -10,6 +10,7 @@
 body, html {
     height: 100%;
     overflow: hidden;
+    margin: 0;
 }
 
 h1 {
@@ -24,8 +25,8 @@ h1 {
     justify-content: center;
 }
 
-.main {
-    padding-top: Calc(50vh - 10rem);
+main {
+    padding-top: calc(50vh - 10rem);
 }
 
 .background {
@@ -39,4 +40,23 @@ h1 {
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
+}
+
+/* Footer immer am unteren Rand */
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0.3rem;
+    color: white;
+}
+
+/* Container für zensierte Blockelemente */
+.censored-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
 }

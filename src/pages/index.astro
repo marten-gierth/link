@@ -1,7 +1,6 @@
 ---
 import SocialIcons from '../components/SocialIcons.jsx';
 import '../styles/global.css';
-import '../styles/index.css';
 import Head from "../components/Head.astro";
 ---
 
@@ -10,16 +9,18 @@ import Head from "../components/Head.astro";
     <Head/>
 </head>
 <body>
+<div class="noscroll"></div>
 <div class="background"></div>
-<div class="main">
-
-    <h1> Moin, I am Marten</h1>
-    <div class="socialIconsContainer">
-        <SocialIcons/>
+<main>
+    <div class="censored-container">
+        <h1><span style="color: white"> Moin, I am Marten</h1>
+        <div class="socialIconsContainer">
+            <SocialIcons/>
+        </div>
     </div>
-</div>
-<div class="footer">
-    <a href="/legal/">legal</a>
-</div>
+</main>
+<footer>
+    <p><a href="/legal"><span style="color: white">Legal Notice</span></a></p>
+</footer>
 </body>
 </html>
