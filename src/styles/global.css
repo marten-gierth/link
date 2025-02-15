@@ -38,22 +38,17 @@ footer {
     color: white;
 }
 
-.noscroll {
-    height: 100%;
-    overflow: hidden;
-    padding-top: calc(50vh - 10rem);
-}
-
 .censored-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 2rem;
+    padding-top: min(50vh, calc(40vh - 8rem));
 }
 
 .contentwrapper {
-    padding: 4rem;
+    padding: 2rem;
     max-width: 1280px;
     margin: 0 auto;
 }
