@@ -4,8 +4,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/global.css';
 
 const SocialIcons = () => {
-    return (
-        <div className="flex justify-center space-x-6 class">
+    return (<div className="flex justify-center space-x-6 class">
             <a href="https://www.linkedin.com/in/marten-gierth/" target="_blank" rel="noopener noreferrer"
                aria-label="LinkedIn"
                className="rounded-full bg-blue-700 hover:bg-blue-800 transition duration-300 p-6">
@@ -23,8 +22,7 @@ const SocialIcons = () => {
                className="rounded-full bg-pink-500 hover:bg-pink-600 transition duration-300 p-6">
                 <FontAwesomeIcon icon={faInstagram} className="icon-large"/>
             </a>
-        </div>
-    );
+        </div>);
 };
 
 export default SocialIcons;

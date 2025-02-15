@@ -1,56 +1,26 @@
 ---
 import SocialIcons from '../components/SocialIcons.jsx';
 import '../styles/global.css';
+import Head from "../components/Head.astro";
 ---
 
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <meta name="viewport" content="width=device-width"/>
-    <meta name="generator" content={Astro.generator}/>
-    <title>Marten Gierth</title>
-
-    <!-- Meta Tags for SEO -->
-    <meta name="robots" content="INDEX,FOLLOW" />
-    <meta http-equiv="Pragma" content="cache" />
-    <meta name="revisit-after" content="2 days" />
-    <meta name="audience" content="Alle" />
-    <meta http-equiv="Content-Language" content="de" />
-    <meta name="language" content="en" />
-    <meta name="author" content="Marten Gierth" />
-    <meta name="copyright" content="Marten Gierth" />
-    <meta name="page-type" content="Private Homepage" />
-    <meta name="keywords" content="Marten Gierth Dresden, Marten Gierth, Marten Gierth Portfolio, MoinMarten, moin.marten" />
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Marten Gierth | link page">
-    <meta property="og:description" content="Welcome to my link page. Here you'll find links to my social media channels">
-    <meta property="og:image" content="/assets/gradient.jpg">
-    <meta property="og:url" content="https://mgierth.de">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Marten Gierth">
-
-    <!-- Canonical Link -->
-    <link rel="canonical" href="https://mgierth.de">
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Marten Gierth",
-            "url": "https://mgierth.de"
-        }
-    </script>
+    <Head/>
 </head>
 <body>
+<div class="noscroll"></div>
 <div class="background"></div>
-<div class="main">
-    <h1>Moin, i am Marten</h1>
-    <div class="socialIconsContainer">
-        <SocialIcons/>
+<main>
+    <div class="censored-container">
+        <h1><span style="color: white"> Moin, I am Marten</h1>
+        <div class="socialIconsContainer">
+            <SocialIcons/>
+        </div>
     </div>
-</div>
+</main>
+<footer>
+    <p><a href="/legal"><span style="color: white">Legal Notice</span></a></p>
+</footer>
 </body>
 </html>
