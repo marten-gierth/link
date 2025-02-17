@@ -2,6 +2,7 @@
 import SocialIcons from '../components/SocialIcons.jsx';
 import '../styles/global.css';
 import Head from "../components/Head.astro";
+import ChipLink from '../components/chipLink.astro';
 ---
 
 <html lang="en">
@@ -19,7 +20,7 @@ import Head from "../components/Head.astro";
     </div>
 </main>
 <footer>
-    <p><a href="/legal"><span style="color: white">Legal Notice</span></a></p>
-</footer>
+    <ChipLink chipType="NEW" chipTypeColor="Red" chipText="Projects" url="/projects" iconRight="assets/arrow-right.svg"/>
+    <ChipLink chipText="Legal Notice" url="/legal" iconRight="assets/arrow-right.svg"/>
 </body>
 </html>

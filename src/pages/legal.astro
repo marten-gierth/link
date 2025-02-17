@@ -1,6 +1,7 @@
 ---
 import Head from '../components/Head.astro';
 import '../styles/global.css';
+import ChipLink from "../components/ChipLink.astro";
 ---
 <html lang="en">
 <head>
@@ -12,6 +13,7 @@ import '../styles/global.css';
         <h1>
             Legal Notice
         </h1>
+        <ChipLink chipText="home" url="/" iconLeft="assets/arrow-left.svg"/>
         <p>
             According to § 5 DDG, this website does not require an imprint, as it is a private portfolio without
             commercial intent. The website does not use cookies, tracking technologies, analytics tools, or third-party
@@ -20,9 +22,8 @@ import '../styles/global.css';
         <p>This website is hosted on GitHub Pages. Please note that GitHub may process technical data such as IP
             addresses for operational purposes. For more information, refer to GitHub’s <a
                     href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
-                    target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #007bff;">Privacy Policy</a>.</p>
-
-        <p><a href="/" style="text-decoration: none; color: #007bff;"><- Back to homepage</a></p>
+                    target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #007bff;">Privacy Policy</a>.
+        </p>
     </div>
 </main>
 </body>

@@ -35,6 +35,7 @@ footer {
     width: 100%;
     text-align: center;
     padding: 0.3rem;
+    margin-bottom: 1rem;
     color: white;
 }
 
@@ -107,7 +108,6 @@ a {
     color: var(--color-a);
     text-decoration: none;
 }
-
 
 .icon-large {
     font-size: 4rem;
