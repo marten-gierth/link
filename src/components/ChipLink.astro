@@ -27,12 +27,12 @@ const {
 ---
 
 <div class="chip-wrapper">
-    <a class="clip-link" href={`${url}`} target={urlNewTab ? "_blank" : ""} rel="noopener noreferrer">
-        <div class="clip">
+    <a class="chip-link" href={`${url}`} target={urlNewTab ? "_blank" : ""} rel="noopener noreferrer">
+        <div class="chip">
 
             {chipType && <span class="chip-type" style={chipTypeColor ? { backgroundColor: chipTypeColor } : {}}>{chipType}</span>}
             {chipText && (
-                    <p class="cliptext">
+                    <p class="chiptext">
                         {iconLeft && <img src={iconLeft} alt="Icon"/>}
                         {chipText}
                         {iconRight && <img src={iconRight} alt="Icon"/>}
@@ -49,7 +49,7 @@ const {
         display: inline-block;
     }
 
-    div.clip {
+    div.chip {
         position: relative;
         background-color: #ffffff;
         padding: 0.2rem 1.25rem;
@@ -68,15 +68,15 @@ const {
         margin: 0;
     }
 
-    div.clip svg {
+    div.chip svg {
         margin-right: 0.8rem;
     }
 
-    div.clip:hover {
+    div.chip:hover {
         transform: rotate(-2deg);
     }
 
-    p.cliptext {
+    p.chiptext {
         text-decoration: none;
         color: var(--color-text);
         font-size: 1.25rem;
@@ -109,7 +109,7 @@ const {
         font-family: 'Inter', serif;
     }
 
-    a.clip-link {
+    a.chip-link {
         margin: 0;
         padding: 0;
         color: var(--color-text);
