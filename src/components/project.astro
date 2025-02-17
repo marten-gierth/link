@@ -24,60 +24,62 @@ const {
     url1 = "",
     chipType1 = "",
     chipTypeColor1 = "",
-    chipText1="",
+    chipText1 = "",
 
     url2 = "",
     chipType2 = "",
     chipTypeColor2 = "",
-    chipText2=""
+    chipText2 = ""
 
 } = Astro.props;
 ---
 <div class="project-container">
-<div class="project-description">
-    <h2>
-        {title}
-    </h2>
-    <p>{description}</p>
-    <ChipLink chipType={chipType1} chipText={chipText1} chipTypeColor={chipTypeColor1} url={url1} ?{url1} :{}  urlNewTab=true iconRight="assets/arrow-right.svg" backgroundColor={chipTypeColor1}/>
-    <ChipLink chipType={chipType2} chipText={chipText2} chipTypeColor={chipTypeColor2} url={url2} ?{url2} :{}  urlNewTab=true iconRight="assets/arrow-right.svg" backgroundColor={chipTypeColor2}/>
+    <div class="project-description">
+        <h2>
+            {title}
+        </h2>
+        <p>{description}</p>
+        <ChipLink chipType={chipType1} chipText={chipText1} chipTypeColor={chipTypeColor1} url={url1} ? {url1} : {}
+                  urlNewTab=true iconRight="assets/arrow-right.svg" backgroundColor={chipTypeColor1}/>
+        <ChipLink chipType={chipType2} chipText={chipText2} chipTypeColor={chipTypeColor2} url={url2} ? {url2} : {}
+                  urlNewTab=true iconRight="assets/arrow-right.svg" backgroundColor={chipTypeColor2}/>
+    </div>
+    {image && <img src={image} alt={title} class="selectDisable"/>}
 </div>
-    {image && <img src={image} alt={title}/>}
-</div>
-
 
 <style>
-.project-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem 1rem 0 1rem;
-    padding: 0 2rem 1rem 2rem;
-    border-radius: 1rem;
-    background-color: var(--color-background);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.project-container img {
-    width: 100%;
-    border-radius: 1rem;
-}
-.project-container h2{
-    margin: 0;
-    padding: 0;
-}
-
-.project-container p{
-    margin: 0;
-    padding: 1rem 0;
-}
-
-
-@media (min-width: 1280px) {
     .project-container {
-        display: grid;
-        grid-template-columns: 3fr 2fr;
-        gap: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem 1rem 0 1rem;
+        padding: 0 2rem 1rem 2rem;
+        border-radius: 1rem;
+        background-color: var(--color-background);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-}
+
+    .project-container img {
+        width: 100%;
+        border-radius: 1rem;
+    }
+
+    .project-container h2 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .project-container p {
+        margin: 0;
+        padding: 1rem 0;
+    }
+
+    @media (min-width: 1280px) {
+        .project-container {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 1rem;
+        }
+    }
 </style>
