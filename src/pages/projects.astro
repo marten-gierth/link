@@ -1,0 +1,46 @@
+---
+import Head from '../components/Head.astro';
+import '../styles/global.css';
+import ChipLink from "../components/ChipLink.astro";
+import Project from "../components/project.astro";
+import Footer from "../components/Footer.astro";
+---
+<html lang="en">
+<head>
+    <Head title="Marten Gierth | Projects" url="https://mgierth.de/projects"
+          description="Take a look at my creative projects in game development and interactive experiences!"/>
+</head>
+<body>
+<main>
+    <div class="contentwrapper">
+        <h1>
+            Projects
+        </h1>
+        <ChipLink chipText="home" url="/" iconLeft="assets/arrow-left.svg"/>
+    </div>
+    <div class="projectwrapper">
+        <Project title="Caveman hits Giraffe in a Car"
+                 description="Slash, survive and get tougher - a wacky action roguelike with hand-drawn graphics and a caveman on the hunt for monsters! Just when you think you've seen it all, here it comes: a giraffe in a car."
+                 image="assets/cavemanhitsgiraffeinacar-banner.avif"
+                 url1=https://cavemanhitsgiraffeinacar.github.io
+                 chipType1="Website"
+                 chipTypeColor1=""
+                 chipText1="play in browser"
+
+                 url2=https://store.steampowered.com/app/3381780/Caveman_hits_Giraffe_in_a_Car/
+ chipType2="Steam"
+                 chipTypeColor2="#00adee"
+                 chipText2=" "
+        />
+    </div>
+</main>
+<Footer/>
+</body>
+
+<style>
+    .projectwrapper {
+        padding: 0.5rem;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+</style>

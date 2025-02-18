@@ -2,11 +2,12 @@
 import SocialIcons from '../components/SocialIcons.jsx';
 import '../styles/global.css';
 import Head from "../components/Head.astro";
+import ChipLink from '../components/chipLink.astro';
+import Footer from '../components/Footer.astro';
 ---
-
 <html lang="en">
 <head>
-    <Head/>
+    <Head title="Marten Gierth | Portfolio"/>
 </head>
 <body style=" height: 100%; overflow: hidden;">
 <div class="background"></div>
@@ -16,10 +17,12 @@ import Head from "../components/Head.astro";
         <div class="socialIconsContainer">
             <SocialIcons/>
         </div>
+        <div class="linkContainer">
+            <ChipLink chipType="new" chipTypeColor="Red" chipText="Projects" url="/projects"
+                      iconRight="assets/arrow-right.svg"/>
+        </div>
     </div>
 </main>
-<footer>
-    <p><a href="/legal"><span style="color: white">Legal Notice</span></a></p>
-</footer>
+<Footer/>
 </body>
 </html>
