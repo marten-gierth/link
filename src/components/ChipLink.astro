@@ -1,0 +1,119 @@
+---
+interface Props {
+    chipType?: string;
+    chipTypeColor?: string;
+
+    chipText?: string;
+
+    url?: string;
+    urlNewTab?: boolean;
+
+    iconRight?: string;
+    iconLeft?: string;
+    backgroundColor?: string;
+}
+
+const {
+    chipType = "",
+    chipText = "",
+    chipTypeColor = "",
+    url = "/",
+    urlNewTab = false,
+    iconRight = "",
+    iconLeft = "",
+    backgroundColor = `${chipTypeColor}`
+
+} = Astro.props;
+---
+<div class="chip-wrapper">
+    <a class="chip-link" href={`${url}`} target={urlNewTab ? "_blank" : ""} rel="noopener noreferrer">
+        <div class="chip">
+            {chipType && (
+                    <span class="chip-type" style={chipTypeColor ? {backgroundColor: chipTypeColor} : {}}>
+                    {chipType}
+                </span>
+            )}
+            {chipText && (
+                    <p class="chiptext">
+                        {iconLeft && <img src={iconLeft} alt="Icon"/>}
+                        {chipText}
+                        {iconRight && <img src={iconRight} alt="Icon"/>}
+                    </p>
+            )}
+        </div>
+        <span class="chip-background" style={backgroundColor ? {backgroundColor: backgroundColor} : {}}></span>
+    </a>
+</div>
+
+<style>
+    div.chip-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    div.chip {
+        position: relative;
+        background-color: #ffffff;
+        padding: 0.2rem 1.25rem;
+        padding-bottom: 4px;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        z-index: 1;
+        border-color: var(--color-text);
+        border: solid 1px;
+        position: relative;
+        transition: transform 0.15s ease-out;
+        transform-origin: top left;
+        align-items: center;
+        display: inline-flex;
+        padding: 0;
+        margin: 0;
+    }
+
+    div.chip svg {
+        margin-right: 0.8rem;
+    }
+
+    div.chip:hover {
+        transform: rotate(-2deg);
+    }
+
+    p.chiptext {
+        text-decoration: none;
+        color: var(--color-text);
+        font-size: 1.25rem;
+        margin: 0.17rem 0;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    span.chip-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #232323;
+        z-index: 0;
+        border-radius: 1.5rem;
+        border-color: #efefef;
+        border: solid 1px;
+    }
+
+    span.chip-type {
+        margin: 0.17rem 0 0.17rem 0.17rem;
+        padding: .2rem 0.6rem;
+        border-radius: 1rem;
+        color: white;
+        Background-color: black;
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: 'Inter', serif;
+    }
+
+    a.chip-link {
+        margin: 0;
+        padding: 0;
+        color: var(--color-text);
+    }
+</style>
