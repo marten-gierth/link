@@ -6,7 +6,7 @@ import ChipLink from '../components/chipLink.astro';
 ---
 <html lang="en">
 <head>
-    <Head/>
+    <Head title="Marten Gierth | Portfolio"/>
 </head>
 <body style=" height: 100%; overflow: hidden;">
 <div class="background"></div>
@@ -16,11 +16,13 @@ import ChipLink from '../components/chipLink.astro';
         <div class="socialIconsContainer">
             <SocialIcons/>
         </div>
+        <div class="linkContainer">
+            <ChipLink chipType="new" chipTypeColor="Red" chipText="Projects" url="/projects"
+                      iconRight="assets/arrow-right.svg"/>
+        </div>
     </div>
 </main>
 <footer>
-    <ChipLink chipType="NEW" chipTypeColor="Red" chipText="Projects" url="/projects"
-              iconRight="assets/arrow-right.svg"/>
     <ChipLink chipText="Legal Notice" url="/legal" iconRight="assets/arrow-right.svg"/>
 </body>
 </html>

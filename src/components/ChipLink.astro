@@ -29,7 +29,6 @@ const {
 <div class="chip-wrapper">
     <a class="chip-link" href={`${url}`} target={urlNewTab ? "_blank" : ""} rel="noopener noreferrer">
         <div class="chip">
-            {chipType && <span class="chip-type" style={chipTypeColor ? { backgroundColor: chipTypeColor } : {}}>{chipType}</span>}
             {chipText && (
                     <p class="chiptext">
                         {iconLeft && <img src={iconLeft} alt="Icon"/>}
@@ -38,7 +37,7 @@ const {
                     </p>
             )}
         </div>
-        <span class="chip-background" style={backgroundColor ? { backgroundColor: backgroundColor } : {}}></span>
+        <span class="chip-background" style={backgroundColor ? {backgroundColor: backgroundColor} : {}}></span>
     </a>
 </div>
 
@@ -97,12 +96,12 @@ const {
         border: solid 1px;
     }
 
-    span.chip-type{
+    span.chip-type {
         margin: 0.17rem 0 0.17rem 0.17rem;
         padding: .2rem 0.6rem;
         border-radius: 1rem;
         color: white;
-        Background-color:black;
+        Background-color: black;
         font-size: 1rem;
         font-weight: 700;
         font-family: 'Inter', serif;

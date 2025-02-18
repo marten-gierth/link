@@ -61,13 +61,21 @@ const {
     }
 
     .project-container img {
-        width: 100%;
         border-radius: 1rem;
+        max-height: 12rem;
+    }
+
+    @media (min-width: 1280px) {
+        .project-container img {
+            margin-left: auto;
+            max-height: 16rem;
+        }
     }
 
     .project-container h2 {
         margin: 0;
         padding: 0;
+        padding-top: 2rem;
     }
 
     .project-container p {
