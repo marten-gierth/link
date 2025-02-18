@@ -17,6 +17,8 @@ import Footer from "../components/Footer.astro";
             Projects
         </h1>
         <ChipLink chipText="home" url="/" iconLeft="assets/arrow-left.svg"/>
+    </div>
+    <div class="projectwrapper">
         <Project title="Caveman hits Giraffe in a Car"
                  description="Slash, survive and get tougher - a wacky action roguelike with hand-drawn graphics and a caveman on the hunt for monsters! Just when you think you've seen it all, here it comes: a giraffe in a car."
                  image="assets/cavemanhitsgiraffeinacar-banner.avif"
@@ -34,3 +36,11 @@ import Footer from "../components/Footer.astro";
 </main>
 <Footer/>
 </body>
+
+<style>
+    .projectwrapper {
+        padding: 0.5rem;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+</style>
