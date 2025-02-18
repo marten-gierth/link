@@ -30,7 +30,7 @@ body, html {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     text-align: center;
@@ -91,6 +91,16 @@ h2 {
     position: relative;
 }
 
+h3 {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-family: 'inter', serif;
+    font-weight: 200;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
 .h1-center {
     text-align: center;
     align-items: center;
@@ -100,9 +110,9 @@ h2 {
 
 p {
     color: var(--color-text);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-family: 'Inter', serif;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 a {
