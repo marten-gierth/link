@@ -25,10 +25,14 @@ const {
 
 } = Astro.props;
 ---
-
 <div class="chip-wrapper">
     <a class="chip-link" href={`${url}`} target={urlNewTab ? "_blank" : ""} rel="noopener noreferrer">
         <div class="chip">
+            {chipType && (
+                    <span class="chip-type" style={chipTypeColor ? {backgroundColor: chipTypeColor} : {}}>
+                    {chipType}
+                </span>
+            )}
             {chipText && (
                     <p class="chiptext">
                         {iconLeft && <img src={iconLeft} alt="Icon"/>}
