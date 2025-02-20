@@ -3,7 +3,6 @@ import Head from '../components/Head.astro';
 import '../styles/global.css';
 import ChipLink from "../components/ChipLink.astro";
 import Project from "../components/project.astro";
-import Footer from "../components/Footer.astro";
 ---
 <html lang="en">
 <head>
@@ -11,6 +10,7 @@ import Footer from "../components/Footer.astro";
           description="Take a look at my creative projects in game development and interactive experiences!"/>
 </head>
 <body>
+<div class="background"></div>
 <main>
     <div class="contentwrapper">
         <h1>
@@ -19,41 +19,24 @@ import Footer from "../components/Footer.astro";
         <ChipLink chipText="home" url="/" iconLeft="/assets/arrow-left.svg"/>
     </div>
     <div class="projectwrapper">
-        <Project visible={false}
-                title="Caveman hits Giraffe in a Car"
-                 secondTitle="A unique action roguelike game with hand-drawn art, created in  in collaboration with "
-                 description="Slash, survive and get tougher - a wacky action roguelike with hand-drawn graphics and a caveman on the hunt for monsters! Just when you think you've seen it all, here it comes: a giraffe in a car."
-                    collaborationName1="Karl Kuhne "
-                    collaborationName1Link="https://www.linkedin.com/in/karl-kuhne/"
-                    collaborationName2="Philip Ahlers"
-                    collaborationName2Link="https://www.linkedin.com/in/philip-ahlers-a915b0341/"
-
-                 image="/assets/cavemanhitsgiraffeinacar-banner.avif"
-                 url1="https://cavemanhitsgiraffeinacar.github.io"
-                 chipType1="Website"
-                 chipTypeColor1=""
-                 chipText1="play in browser"
-
-                 url2="https://store.steampowered.com/app/3381780/Caveman_hits_Giraffe_in_a_Car/"
-                 chipType2="Steam"
-                 chipTypeColor2="#00adee"
-                 chipText2="download"
-
-                 url3="https://youtu.be/xvFZjo5PgG0?feature=shared"
-                 chipType3="Youtube"
-                 chipTypeColor3="#FF0000"
-                 chipText3="gameplay trailer"
-        />
         <Project visible={true}
                  title="Caveman hits Giraffe in a Car"
-                 secondTitle="A unique action roguelike game with hand-drawn art, created in  in collaboration with "
+                 projectTag1="Game"
+                 projectTag2="action roguelite"
+                 projectTag3="single-player"
+                 projectTag4="hand-drawn"
+                 projectTag5="Unity"
+                 projectTag6="University project"
+
                  description="Slash, survive and get tougher - a wacky action roguelike with hand-drawn graphics and a caveman on the hunt for monsters! Just when you think you've seen it all, here it comes: a giraffe in a car."
-                 collaborationName1="Karl Kuhne "
+                 collaborationName1="Karl Kuhne"
                  collaborationName1Link="https://www.linkedin.com/in/karl-kuhne/"
+                 collaborationmid=" and "
                  collaborationName2="Philip Ahlers"
                  collaborationName2Link="https://www.linkedin.com/in/philip-ahlers-a915b0341/"
+                 collaborationend="."
 
-                 image="/assets/cavemanhitsgiraffeinacar-banner.avif"
+                 image="/assets/projects/Caveman-hits-Giraffe-in-a-Car.jpg"
                  url1="https://cavemanhitsgiraffeinacar.github.io"
                  chipType1="Website"
                  chipTypeColor1=""
@@ -65,24 +48,148 @@ import Footer from "../components/Footer.astro";
                  chipText2="download"
         />
         <Project visible={true}
-                 title="Caveman hits Giraffe in a Car"
-                 secondTitle="A unique action roguelike game with hand-drawn art, created in  in collaboration with "
-                 description="Slash, survive and get tougher - a wacky action roguelike with hand-drawn graphics and a caveman on the hunt for monsters! Just when you think you've seen it all, here it comes: a giraffe in a car."
-                 collaborationName1="Karl Kuhne "
-                 collaborationName1Link="https://www.linkedin.com/in/karl-kuhne/"
-                 collaborationName2="Philip Ahlers"
-                 collaborationName2Link="https://www.linkedin.com/in/philip-ahlers-a915b0341/"
+                 title="Pay-to-Win in Mobile-Games"
+                 projectTag1="Video Essay"
+                 projectTag2="German"
+                 projectTag3=""
+                 projectTag4=""
+                 projectTag5=""
+                 projectTag6="University project"
+                 description="In this German video essay, I explore the pay-to-win model in mobile games. I discuss the ethical issues surrounding manipulation and the game mechanics designed to maximize in-game purchases. Additionally, I examine how real-money purchases give players advantages and their impact on the gaming community."
 
-                 image="/assets/cavemanhitsgiraffeinacar-banner.avif"
-                 url1="https://cavemanhitsgiraffeinacar.github.io"
-                 chipType1="Website"
-                 chipTypeColor1=""
-                 chipText1="play in browser"
+                 image="/assets/projects/Pay-to-Win-in-Mobile-Games.jpg"
 
-                 url2="https://store.steampowered.com/app/3381780/Caveman_hits_Giraffe_in_a_Car/"
-                 chipType2="Steam"
-                 chipTypeColor2="#00adee"
-                 chipText2="download"
+                 url1="https://youtu.be/9f3-4u0PiS8"
+                 chipType1="Youtube"
+                 chipTypeColor1="#FF0000"
+                 chipText1="watch"
+        />
+        <Project visible={true}
+                 title="Vacation"
+                 projectTag1="Animation"
+                 projectTag2="Vector"
+                 projectTag3="Sound Design"
+                 projectTag4=""
+                 projectTag5=""
+                 projectTag6="University project"
+                 description="A fictional soft drink ad, brought to life through a dynamic vector animation in After Effects with sound design. "
+
+                 image="/assets/projects/Vacation.jpg"
+
+                 url1="https://youtu.be/VArubALNi3Q"
+                 chipType1="Youtube"
+                 chipTypeColor1="#FF0000"
+                 chipText1="watch"
+        />
+        <Project visible={true}
+                 title="Dresden is UNreal"
+                 projectTag1="Video"
+                 projectTag2=""
+                 projectTag3=""
+                 projectTag4=""
+                 projectTag5=""
+                 projectTag6="University project"
+
+                 description="A fast-paced journey through Dresden - match cuts, hyperlapses, and vibrant street art blend into a seamless visual flow."
+
+                 collaborationName1="Ragnar Schott"
+                 collaborationName1Link="https://de.linkedin.com/in/ragnar-schott-597332300"
+                 collaborationend="."
+
+                 image="/assets/projects/Dresden-is-UNreal.jpg"
+
+                 url1="https://youtu.be/fnPlhtcw6DQ"
+                 chipType1="Youtube"
+                 chipTypeColor1="#FF0000"
+                 chipText1="watch"
+        />
+        <Project visible={true}
+                 title="Jurassic Park 1993"
+                 projectTag1="Sound Design"
+                 projectTag2=""
+                 projectTag3=""
+                 projectTag4=""
+                 projectTag5=""
+                 projectTag6="University project"
+
+                 description="For this project, I took on the challenge of creating my own sound design for iconic scenes from the film. All sounds – from the roaring T-Rex to clattering pots – come from the FreeSounds.org library and were carefully timed to recreate the atmosphere of the original."
+
+                 image="/assets/projects/Jurassic-Park-1993.jpg"
+
+                 url1="https://youtu.be/sRw2pn8igZY"
+                 chipType1="Youtube"
+                 chipTypeColor1="#FF0000"
+                 chipText1="watch"
+        />
+        <Project visible={true}
+                 title="Pearl Western Style"
+                 projectTag1="Video"
+                 projectTag2="Sound Design"
+                 projectTag3="Challenge"
+                 projectTag4=""
+                 projectTag5=""
+                 projectTag6="University project"
+
+                 description="A cinematic fragrance ad, created in a three-day challenge for the fictional project Pearl. Filmed in a retired bank vault. "
+
+                 collaborationName1="Ragnar Schott"
+                 collaborationName1Link="https://de.linkedin.com/in/ragnar-schott-597332300"
+                 collaborationmid=" and "
+                 collaborationName2="Karl Kuhne"
+                 collaborationName2Link="https://www.linkedin.com/in/karl-kuhne/"
+                 collaborationend="."
+
+                 image="/assets/projects/Pearl-Western-Style.jpg"
+
+                 url1="https://youtu.be/NOOiQu3aN4Y"
+                 chipType1="Youtube"
+                 chipTypeColor1="#FF0000"
+                 chipText1="watch"
+        />
+        <Project visible={true}
+                 title="Pearl Hyper Cars"
+                 projectTag1="Video"
+                 projectTag2="Voice Over"
+                 projectTag3="Challenge"
+                 projectTag4=""
+                 projectTag5=""
+                 projectTag6="University project"
+
+                 description="A cinematic toy car ad, crafted in a three-day challenge for the fictional project PEAL. Inspired by over-the-top childhood toy commercials, it’s a high-energy ride—dramatic, fast-paced, and just a little too epic for a tiny car."
+
+                 collaborationName1="Ragnar Schott"
+                 collaborationName1Link="https://de.linkedin.com/in/ragnar-schott-597332300"
+                 collaborationmid=" and "
+                 collaborationName2="Karl Kuhne"
+                 collaborationName2Link="https://www.linkedin.com/in/karl-kuhne/"
+                 collaborationend="."
+
+                 image="/assets/projects/Pearl-Hyper-Cars.jpg"
+                 imagelink="https://youtu.be/i9LUcAnMrXs"
+
+                 url1="https://youtu.be/i9LUcAnMrXs"
+                 chipType1="Youtube"
+                 chipTypeColor1="#FF0000"
+                 chipText1="watch"
+        />
+        <Project visible={true}
+                 title="Photo Editing"
+                 projectTag1="Image Editing"
+                 projectTag2=""
+                 projectTag3=""
+                 projectTag4=""
+                 projectTag5=""
+                 projectTag6="Hobby projects"
+
+                 description="I enjoy editing photos in Adobe Lightroom. Check out my profile for more!"
+
+                 noimage={true}
+                 image=""
+
+                 url1="https://lightroom.adobe.com/u/martengierth/"
+                 chipType1="Lightroom"
+                 chipTypeColor1="#001e37"
+                 chipText1="profile"
         />
     </div>
 </main>
@@ -93,5 +200,15 @@ import Footer from "../components/Footer.astro";
         padding: 0.5rem;
         max-width: 1280px;
         margin: 0 auto;
+    }
+
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f6f6f6;
+        z-index: -1;
     }
 </style>

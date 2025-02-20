@@ -3,16 +3,27 @@ import ChipLink from "./ChipLink.astro";
 interface Props {
     visible?: boolean;
     title?: string;
+    projectTag1?: string;
+    projectTag2?: string;
+    projectTag3?: string;
+    projectTag4?: string;
+    projectTag5?: string;
+    projectTag6?: string;
+
     secondTitle?: string;
     description?: string;
 
     collaboration?: string;
     collaborationName1?: string;
     collaborationName1Link?: string;
+    collaborationmid?: string;
     collaborationName2?: string;
     collaborationName2Link?: string;
+    collaborationend?: string;
 
+    noimage?: boolean;
     image?: string;
+    imagelink?: string;
 
     url1?: string;
     chipType1?: string;
@@ -33,19 +44,26 @@ interface Props {
 const {
     visible = true,
     title = "",
-    secondTitle = "",
+    projectTag1 = "",
+    projectTag2 = "",
+    projectTag3 = "",
+    projectTag4 = "",
+    projectTag5 = "",
+    projectTag6 = "",
     description = "",
 
-    collaboration = "",
     collaborationName1 = "",
     collaborationName1Link = "",
+    collaborationmid = "",
     collaborationName2 = "",
     collaborationName2Link = "",
+    collaborationend = "",
 
-
+    noimage = false,
     image = "",
 
     url1 = "",
+    imagelink = url1,
     chipType1 = "",
     chipTypeColor1 = "",
     chipText1 = "",
@@ -61,23 +79,33 @@ const {
     chipText3 = ""
 
 } = Astro.props;
+const noImage = !image;
 ---
 {visible && (
-<div class="project-container">
+<div class={`project-container ${noimage ? "project-container-noimage" : ""}`}>
     <div class="project-description">
         <h2>
             {title}
         </h2>
-        <h3>
-            {secondTitle && (
+        <p class="project-tag">
+            {projectTag1 && projectTag1}
+            {projectTag2 && ', ' + projectTag2}
+            {projectTag3 && ', ' + projectTag3}
+            {projectTag4 && ', ' + projectTag4}
+            {projectTag5 && ', ' + projectTag5}
+            {projectTag6 && ', ' + projectTag6}
+        </p>
+        <p class="project-description-text">{description}
+            {collaborationName1Link && (
                     <>
-                        {secondTitle}
-                        <a href={`${collaborationName1Link}`} target="_blank">{collaborationName1}</a> and
-                        <a href={`${collaborationName2Link}`} target="_blank">{collaborationName2}</a>.
+                        In collaboration with
+                        <a href={`${collaborationName1Link}`}
+                           target="_blank">{collaborationName1}</a> {collaborationmid}
+                        <a href={`${collaborationName2Link}`}
+                           target="_blank">{collaborationName2}</a> {collaborationend}
                     </>
             )}
-        </h3>
-        <p>{description}</p>
+        </p>
         <div class="linkchipContainer">
             <div>
                 {url1 &&
@@ -102,9 +130,17 @@ const {
             </div>
         </div>
     </div>
-    {image && <img src={image} alt={title} class="selectDisable"/>}
-</div>
-    )}
+    { image ? (
+        imagelink ? (
+        <a className="imageLink" href={imagelink} target="_blank" rel="noopener noreferrer">
+            <img src={image} alt={title} className="selectDisable"/>
+        </a>
+            ) : (
+        <img src={image} alt={title} className="selectDisable"/>
+            )
+        ) : null }
+        </div>
+        )}
 
 <style>
     .project-container {
@@ -112,23 +148,44 @@ const {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 3rem 0.5rem 0 0.5rem;
-        padding: 0 2rem 1rem 2rem;
-        border-radius: 1rem;
-        background-color: var(--color-background);
+        margin: 1.5rem 0.5rem 0 0.5rem;
+        padding: 0 2rem 0rem 2rem;
+        border-radius: 3rem;
+        background-color: white;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .project-container img {
         border-radius: 1rem;
         max-height: 12rem;
+        aspect-ratio: 16 / 9;
+        float: right;
     }
 
-    @media (min-width: 1280px) {
-        .project-container img {
-            margin-left: auto;
-            max-height: 16rem;
-        }
+    .project-container a:has(img) {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        line-height: 0;
+    }
+
+    .project-container a img {
+        display: block;
+        filter: grayscale(0.6);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transition: transform 0.15s ease-in, border-radius 0.1s ease-in, box-shadow 0.3s linear, filter 0.5s linear;
+    }
+
+    .project-container a:hover img {
+        transform: scale(1.015);
+        filter: grayscale(0);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+        border-radius: 1.15rem;
+    }
+
+    .imageLink {
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .project-container h2 {
@@ -142,11 +199,63 @@ const {
         padding: 1rem 0;
     }
 
+
+    .project-description-text {
+        margin-top: 1.2rem !important;
+    }
+
+    p.project-tag {
+        color: rgba(0, 0, 0, 0.65);
+        font-size: 1rem;
+        margin: 0;
+        padding: 0 !important;
+    }
+
     @media (min-width: 1280px) {
         .project-container {
             display: grid;
             grid-template-columns: 3fr 2fr;
             gap: 1rem;
+        }
+
+        .project-container img {
+            margin-left: auto;
+            max-height: 16rem;
+        }
+
+        .project-container-noimage {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 1280px) {
+        .project-container {
+            border-radius: 1rem;
+        }
+
+        .project-container h2 {
+            font-size: 2rem;
+        }
+
+        .project-container img {
+            display: block;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.15s ease-in, border-radius 0.1s ease-in, box-shadow 0.3s linear;
+            width: auto;
+            filter: grayscale(0) !important;
+        }
+
+        .project-container a:has(img) {
+            padding-bottom: 0.5rem;
+        }
+
+        .project-container a:hover img {
+            transform: scale(1.015);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            border-radius: 0.75rem;
+
         }
     }
 
@@ -156,4 +265,5 @@ const {
         gap: 0.3rem;
         margin: 1rem 0;
     }
+
 </style>
