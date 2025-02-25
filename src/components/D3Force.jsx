@@ -31,13 +31,16 @@ export default function D3Force({ graph }) {
             .data(graph.nodes)
             .enter().append("g");
 
-        node.append("circle")
+        node.append("a")
+            .attr("xlink:href", d => d.link)
+            .attr("target", "_blank")
+            .append("circle")
             .attr("r", d => d.radius)
-            .attr("fill", d => d.link ? "red" : "rgba(0, 0, 0, 0.8)")
+            .attr("r", d => d.radius)
+            .attr("fill", d => d.link ? "white" : "rgba(0, 0, 0, 0.8)")
             .attr("stroke", d => d.link ? "black" : "none")
             .attr("stroke-width", d => d.link ? 2 : 0)
-            .call(drag(simulation))
-            .on("click", handleClick);
+            .call(drag(simulation));
 
         const label = svg.selectAll("text")
             .data(graph.nodes)
@@ -47,6 +50,7 @@ export default function D3Force({ graph }) {
             .text(d => d.label)
             .style("font-family", "'Inter', sans-serif")
             .style("font-weight", "400")
+            .style("font-size", "1.1rem")
             .style("pointer-events", "none")
             .style("user-select", "none");
 
@@ -62,12 +66,6 @@ export default function D3Force({ graph }) {
             label
                 .attr("x", d => d.x)
                 .attr("y", d => d.y + d.radius);
-        }
-
-        function handleClick(event, d) {
-            if (d.link) {
-                window.open(d.link, "_blank");
-            }
         }
 
         function handleResize() {
@@ -117,7 +115,7 @@ export default function D3Force({ graph }) {
 
     return (
         <div>
-            <svg ref={ref} style={{ width: "100vw", height: "50vh", background: "white" }}></svg>
+            <svg ref={ref} style={{ width: "100vw", height: "50vh"}}></svg>
         </div>
     );
 }

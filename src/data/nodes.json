@@ -1,53 +1,36 @@
 {
   "nodes": [
     { "id": 1, "radius": 15, "label": "moin"},
-    { "id": 40, "radius": 10, "label": "socials" },
+
+    { "id": 30, "radius": 12, "label": "about" ,"link":"about" },
+
+    { "id": 40, "radius": 12, "label": "socials", "link":"link"},
     { "id": 41, "radius": 10, "label": "instagram", "link": "https://instagram.com/moin.marten" },
     { "id": 42, "radius": 10, "label": "linkedin", "link": "https://www.linkedin.com/in/marten-gierth/" },
     { "id": 43, "radius": 10, "label": "github","link": "https,://github.com/marten-gierth" },
     { "id": 44, "radius": 10, "label": "youtube", "link": "https://youtube.com/@moinmarten"},
 
-    { "id": 50, "radius": 12, "label": "me" },
-    { "id": 51, "radius": 10, "label": "age"},
-    { "id": 52, "radius": 8, "label": "23"},
-    { "id": 53, "radius": 10, "label": "home"},
-    { "id": 54, "radius": 8, "label": "Dresden"},
-    { "id": 55, "radius": 8, "label": "Germany"},
 
-
-
-
-
-    { "id": 3, "radius": 10, "label": "projects", "link": "projects"  },
-    { "id": 100, "radius": 12, "label": "game", "link": "projects"  },
-    { "id": 101, "radius": 12, "label": "video", "link": "projects"  },
-    { "id": 102, "radius": 12, "label": "website", "link": "projects" },
-    { "id": 103, "radius": 12, "label": "fun", "link": "projects" }
+    { "id": 100, "radius": 12, "label": "projects", "link": "projects"},
+    { "id": 101, "radius": 10, "label": "game", "link": "projects"  },
+    { "id": 102, "radius": 10, "label": "video", "link": "projects"  },
+    { "id": 103, "radius": 10, "label": "website", "link": "projects" },
+    { "id": 104, "radius": 10, "label": "photos", "link": "projects" }
   ],
   "links": [
-    { "source": 3, "target": 1 },
 
-    { "source": 40, "target": 1 },
+    { "source": 1, "target": 30 },
+    { "source": 1, "target": 40 },
+    { "source": 1, "target": 100 },
+
     { "source": 40, "target": 41 },
     { "source": 40, "target": 42 },
     { "source": 40, "target": 43 },
     { "source": 40, "target": 44 },
 
-
-    { "source": 50, "target": 1 },
-
-    { "source": 50, "target": 51 },
-    { "source": 50, "target": 53 },
-
-    { "source": 52, "target": 51 },
-    { "source": 54, "target": 53 },
-    { "source": 55, "target": 53 },
-    { "source": 55, "target": 54 },
-
-
-    { "source": 100, "target": 3 },
-    { "source": 101, "target": 3 },
-    { "source": 102, "target": 3 },
-    { "source": 103, "target": 3 }
+    { "source": 101, "target": 100 },
+    { "source": 102, "target": 100 },
+    { "source": 103, "target": 100 },
+    { "source": 104, "target": 100 }
   ]
 }
