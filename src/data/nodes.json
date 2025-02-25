@@ -1,15 +1,28 @@
 {
   "nodes": [
-    { "id": 1, "radius": 15, "label": "home", "link": "/" },
-    { "id": 2, "radius": 8, "label": "legal", "link": "legal" } ,
+    { "id": 1, "radius": 15, "label": "moin"},
+    { "id": 2, "radius": 8, "label": "legal", "link": "legal" },
     { "id": 3, "radius": 10, "label": "projects", "link": "projects" },
-    { "id": 4, "radius": 12, "label": "Caveman hits Giraffe in a Car", "link": "projects#Caveman" }
-
-
+    { "id": 4, "radius": 12, "label": "Caveman hits Giraffe in a Car", "link": "projects#Caveman" },
+    { "id": 100, "radius": 12, "label": "test", "tag": true },
+    { "id": 101, "radius": 12, "label": "test", "tag": true },
+    { "id": 102, "radius": 12, "label": "test", "tag": true },
+    { "id": 103, "radius": 12, "label": "test", "tag": true },
+    { "id": 104, "radius": 12, "label": "test", "tag": true }
   ],
   "links": [
-    { "source": 2, "target": 1},
-    { "source": 3, "target": 1},
-    { "source": 4, "target": 3}
+    { "source": 2, "target": 1 },
+    { "source": 3, "target": 1 },
+    { "source": 4, "target": 3 },
+    { "source": 100, "target": 1 },
+    { "source": 101, "target": 1 },
+    { "source": 102, "target": 1 },
+    { "source": 103, "target": 1 },
+    { "source": 104, "target": 1 },
+    { "source": 100, "target": 101 },
+    { "source": 101, "target": 102 },
+    { "source": 102, "target": 103 },
+    { "source": 103, "target": 104 },
+    { "source": 104, "target": 100 }
   ]
 }
