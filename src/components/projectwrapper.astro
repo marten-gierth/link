@@ -1,0 +1,36 @@
+---
+import {useState} from 'react';
+import Project from "../components/project.astro";
+import projects from "../data/projects.json";
+---
+
+{projects.map((project) => (
+<Project
+        key={project.id}
+        visible={project.visible}
+        title={project.title}
+        description={project.description}
+        image={project.image}
+        imagelink={project.links?.[0]?.url || ""}
+        url1={project.links?.[0]?.url || ""}
+        chipType1={project.links?.[0]?.chipType || ""}
+        chipTypeColor1={project.links?.[0]?.chipColor || ""}
+        chipText1={project.links?.[0]?.chipText || ""}
+        {...(project.projectTags && {
+            projectTag1: project.projectTags[0] || "",
+            projectTag2: project.projectTags[1] || "",
+            projectTag3: project.projectTags[2] || "",
+            projectTag4: project.projectTags[3] || "",
+            projectTag5: project.projectTags[4] || "",
+            projectTag6: project.projectTags[5] || "",
+            })}
+        {...(project.collaborations && {
+            collaborationName1: project.collaborations?.[0]?.name || "",
+            collaborationName1Link: project.collaborations?.[0]?.link || "",
+            collaborationmid: project.collaborations.length > 1 ? " und " : "",
+            collaborationName2: project.collaborations?.[1]?.name || "",
+            collaborationName2Link: project.collaborations?.[1]?.link || "",
+            collaborationend: project.collaborations.length > 1 ? "." : "",
+            })}
+/>
+    ))}
