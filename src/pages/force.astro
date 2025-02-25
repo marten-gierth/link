@@ -3,14 +3,4 @@ import D3Force from "../components/D3Force.jsx";
 import graph from "../data/nodes.json";
 ---
 
-<div class="D3force-wrapper">
-<D3Force client:only="react" graph={graph} />
-</div>
-
-<style>
-    .D3force-wrapper{
-        height: 100vh;
-        width: 100vw;
-        border : 1px solid black;
-    }
-</style>
+    <D3Force client:only="react" graph={graph} />
