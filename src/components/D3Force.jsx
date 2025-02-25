@@ -5,7 +5,6 @@ export default function D3Force({ graph }) {
     const ref = useRef();
 
     useEffect(() => {
-        // Initiale Größe des Viewports
         const width = window.innerWidth;
         const height = window.innerHeight * 0.5;
         const svg = d3.select(ref.current).attr("width", width).attr("height", height);
@@ -15,7 +14,6 @@ export default function D3Force({ graph }) {
             .force("link", d3.forceLink(graph.links).id(d => d.id).distance(100))
             .force("charge", d3.forceManyBody().strength(-50))
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("boundary", boundaryForce()) // Grenzkraft hinzufügen
             .on("tick", ticked);
 
         // Linien für die Links
@@ -25,12 +23,30 @@ export default function D3Force({ graph }) {
             .attr("stroke", "#aaa");
 
         // Punkte für die Nodes
-        const node = svg.selectAll("circle")
+        const node = svg.selectAll("g")
             .data(graph.nodes)
-            .enter().append("circle")
+            .enter().append("g");
+
+        // Fügt jedem Knoten ein Link-Element hinzu
+        node.append("a")
+            .attr("xlink:href", d => d.link)
+            .attr("target", "_blank")
+            .append("circle")
             .attr("r", d => d.radius)
             .attr("fill", "steelblue")
             .call(drag(simulation));
+
+        // Labels für die Nodes
+        const label = svg.selectAll("text")
+            .data(graph.nodes)
+            .enter().append("text")
+            .attr("x", d => d.x)
+            .attr("y", d => d.y + d.radius + 5) // Labels unter den Punkten positionieren
+            .attr("text-anchor", "middle")
+            .attr("dy", ".35em")
+            .text(d => d.label)
+            .style("pointer-events", "none") // Verhindert das Markieren der Labels mit der Maus
+            .style("user-select", "none");
 
         function ticked() {
             link
@@ -40,8 +56,11 @@ export default function D3Force({ graph }) {
                 .attr("y2", d => d.target.y);
 
             node
-                .attr("cx", d => d.x)
-                .attr("cy", d => d.y);
+                .attr("transform", d => `translate(${d.x},${d.y})`);
+
+            label
+                .attr("x", d => d.x)
+                .attr("y", d => d.y + d.radius + 5); // Labels folgen den Punkten unterhalb der Knoten
         }
 
         // Drag-Funktion
