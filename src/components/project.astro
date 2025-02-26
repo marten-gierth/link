@@ -3,106 +3,77 @@ import ChipLink from "./ChipLink.astro";
 interface Props {
     visible?: boolean;
     title?: string;
-    secondTitle?: string;
+    projectTags?: string[];
     description?: string;
-
-    collaboration?: string;
-    collaborationName1?: string;
-    collaborationName1Link?: string;
-    collaborationName2?: string;
-    collaborationName2Link?: string;
-
+    collaborations?: { name: string; link: string }[];
     image?: string;
-
-    url1?: string;
-    chipType1?: string;
-    chipTypeColor1?: string;
-    chipText1?: string;
-
-    url2?: string;
-    chipType2?: string;
-    chipTypeColor2?: string;
-    chipText2?: string;
-
-    url3?: string;
-    chipType3?: string;
-    chipTypeColor3?: string;
-    chipText3?: string;
+    imagelink?: string;
+    links?: { url: string; chipType: string; chipColor: string; chipText: string }[];
 }
 
 const {
     visible = true,
     title = "",
-    secondTitle = "",
+    projectTags = [],
     description = "",
-
-    collaboration = "",
-    collaborationName1 = "",
-    collaborationName1Link = "",
-    collaborationName2 = "",
-    collaborationName2Link = "",
-
-
+    collaborations = [],
     image = "",
-
-    url1 = "",
-    chipType1 = "",
-    chipTypeColor1 = "",
-    chipText1 = "",
-
-    url2 = "",
-    chipType2 = "",
-    chipTypeColor2 = "",
-    chipText2 = "",
-
-    url3 = "",
-    chipType3 = "",
-    chipTypeColor3 = "",
-    chipText3 = ""
-
+    links = [],
 } = Astro.props;
+
+const collabText = collaborations
+    .map((collab) => `<a href="${collab.link}" target="_blank">${collab.name}</a>`)
+    .join(" and ");
+
+const linksArray = links.map((link) => ({
+    url: link.url,
+    chipType: link.chipType,
+    chipColor: link.chipColor,
+    chipText: link.chipText
+}));
+
+const imagelink = links.length > 0 ? links[0].url : "";
 ---
 {visible && (
-<div class="project-container">
+<div class={image?.trim() ? "project-container" : "project-container-noimage"}>
     <div class="project-description">
         <h2>
             {title}
         </h2>
-        <h3>
-            {secondTitle && (
-                    <>
-                        {secondTitle}
-                        <a href={`${collaborationName1Link}`}>{collaborationName1}</a> and
-                        <a href={`${collaborationName2Link}`}>{collaborationName2}</a>.
-                    </>
-            )}
-        </h3>
-        <p>{description}</p>
-        <div class="linkchipContainer">
-            <div>
-                {url1 &&
-                        <ChipLink chipType={chipType1} chipText={chipText1} chipTypeColor={chipTypeColor1} url={url1} ?
-                                  {url1} :
-                                  {}
-                                  urlNewTab=true iconRight="/assets/arrow-right.svg" backgroundColor={chipTypeColor1}/>}
-            </div>
-            <div>
-                {url2 &&
-                        <ChipLink chipType={chipType2} chipText={chipText2} chipTypeColor={chipTypeColor2} url={url2} ?
-                                  {url2} :
-                                  {}
-                                  urlNewTab=true iconRight="/assets/arrow-right.svg" backgroundColor={chipTypeColor2}/>}
-            </div>
-            <div>
-                {url3 &&
-                        <ChipLink chipType={chipType3} chipText={chipText3} chipTypeColor={chipTypeColor3} url={url3} ?
-                                  {url3} :
-                                  {}
-                                  urlNewTab=true iconRight="/assets/arrow-right.svg" backgroundColor={chipTypeColor3}/>}
-            </div>
-        </div>
+        <p class="project-tag">
+            <span>{projectTags.join(", ")}</span>
+        </p>
+        <p class="project-description-text"
+           set:html={`${description}${collaborations.length > 0 ? ` In collaboration with ${collabText}.` : ""}`}></p>
+
+        {linksArray.length > 0 && (
+                <div class="linkchipContainer">
+                    {linksArray.map((link) => (
+                            <div>
+                                <ChipLink
+                                        chipType={link.chipType}
+                                        chipText={link.chipText}
+                                        chipTypeColor={link.chipColor}
+                                        url={link.url}
+                                        urlNewTab={true}
+                                        iconRight="/assets/arrow-right.svg"
+                                        backgroundColor={link.chipColor}
+                                />
+                            </div>
+                    ))}
+                </div>
+        )}
     </div>
-    {image && <img src={image} alt={title} class="selectDisable"/>}
+
+    {image && (
+        imagelink ? (
+                <a class="imageLink" href={imagelink} target="_blank" rel="noopener noreferrer">
+                    <img src={image} alt={title}/>
+                </a>
+        ) : (
+                <img src={image} alt={title}/>
+        )
+    )}
 </div>
     )}
 
@@ -112,23 +83,44 @@ const {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 3rem 0.5rem 0 0.5rem;
-        padding: 0 2rem 1rem 2rem;
-        border-radius: 1rem;
-        background-color: var(--color-background);
+        margin: 1.5rem 0.5rem 0 0.5rem;
+        padding: 0 2rem 0 2rem;
+        border-radius: 3rem;
+        background-color: white;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .project-container img {
         border-radius: 1rem;
         max-height: 12rem;
+        aspect-ratio: 16 / 9;
+        float: right;
     }
 
-    @media (min-width: 1280px) {
-        .project-container img {
-            margin-left: auto;
-            max-height: 16rem;
-        }
+    .project-container a:has(img) {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        line-height: 0;
+    }
+
+    .project-container a img {
+        display: block;
+        filter: grayscale(0.6);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transition: transform 0.15s ease-in, border-radius 0.1s ease-in, box-shadow 0.3s linear, filter 0.5s linear;
+    }
+
+    .project-container a:hover img {
+        transform: scale(1.015);
+        filter: grayscale(0);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+        border-radius: 1.15rem;
+    }
+
+    .imageLink {
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .project-container h2 {
@@ -142,11 +134,75 @@ const {
         padding: 1rem 0;
     }
 
+    .project-description-text {
+        margin-top: 1.2rem !important;
+    }
+
+    p.project-tag {
+        color: rgba(0, 0, 0, 0.65);
+        font-size: 1rem;
+        margin: 0;
+        padding: 0 !important;
+    }
+
     @media (min-width: 1280px) {
         .project-container {
             display: grid;
             grid-template-columns: 3fr 2fr;
             gap: 1rem;
+        }
+
+        .project-container img {
+            margin-left: auto;
+            max-height: 16rem;
+        }
+
+        .project-container-noimage {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .project-container-noimage {
+        display: flex;
+        flex-direction: column;
+        margin: 1.5rem 0.5rem 0 0.5rem;
+        padding: 0 2rem 0 2rem;
+        border-radius: 3rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 1280px) {
+        .project-container {
+            border-radius: 1rem;
+        }
+
+        .project-container h2 {
+            font-size: 2rem;
+        }
+
+        .project-container-noimage h2 {
+            font-size: 2rem;
+        }
+
+        .project-container img {
+            display: block;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.15s ease-in, border-radius 0.1s ease-in, box-shadow 0.3s linear;
+            width: auto;
+            filter: grayscale(0) !important;
+        }
+
+        .project-container a:has(img) {
+            padding-bottom: 0.5rem;
+        }
+
+        .project-container a:hover img {
+            transform: scale(1.015);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            border-radius: 0.75rem;
         }
     }
 
