@@ -1,25 +1,21 @@
 {
   "nodes": [
-    { "id": 1, "radius": 15, "label": "moin"},
+    { "id": 1, "radius": 18, "label": "moin"},
 
-    { "id": 30, "radius": 12, "label": "about" ,"link":"about" },
-
-    { "id": 40, "radius": 12, "label": "socials", "link":"link"},
+    { "id": 40, "radius": 14, "label": "socials"},
     { "id": 41, "radius": 10, "label": "instagram", "link": "https://instagram.com/moin.marten" },
     { "id": 42, "radius": 10, "label": "linkedin", "link": "https://www.linkedin.com/in/marten-gierth/" },
-    { "id": 43, "radius": 10, "label": "github","link": "https,://github.com/marten-gierth" },
+    { "id": 43, "radius": 10, "label": "github","link": "https://github.com/marten-gierth" },
     { "id": 44, "radius": 10, "label": "youtube", "link": "https://youtube.com/@moinmarten"},
 
 
-    { "id": 100, "radius": 12, "label": "projects", "link": "projects"},
+    { "id": 100, "radius": 14, "label": "projects", "link": "projects"},
     { "id": 101, "radius": 10, "label": "game", "link": "projects?category=Game"  },
-    { "id": 102, "radius": 10, "label": "video", "link": "projects"  },
-    { "id": 103, "radius": 10, "label": "website", "link": "projects" },
-    { "id": 104, "radius": 10, "label": "photos", "link": "projects" }
+    { "id": 102, "radius": 12, "label": "video", "link": "projects?category=Video"  },
+    { "id": 103, "radius": 10, "label": "photo", "link": "projects?category=Photo" }
+
   ],
   "links": [
-
-    { "source": 1, "target": 30 },
     { "source": 1, "target": 40 },
     { "source": 1, "target": 100 },
 
@@ -30,7 +26,7 @@
 
     { "source": 101, "target": 100 },
     { "source": 102, "target": 100 },
-    { "source": 103, "target": 100 },
-    { "source": 104, "target": 100 }
+    { "source": 103, "target": 100 }
+
   ]
 }

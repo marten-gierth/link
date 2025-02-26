@@ -37,7 +37,7 @@ export default function D3Force({ graph }) {
             .append("circle")
             .attr("r", d => d.radius)
             .attr("r", d => d.radius)
-            .attr("fill", d => d.link ? "white" : "rgba(0, 0, 0, 0.8)")
+            .attr("fill", d => d.link ? "white" : "#3d3d3d")
             .attr("stroke", d => d.link ? "black" : "none")
             .attr("stroke-width", d => d.link ? 2 : 0)
             .call(drag(simulation));
