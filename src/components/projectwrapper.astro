@@ -2,20 +2,28 @@
 import Project from "../components/project.astro";
 import projects from "../data/projects.json";
 
-// Extract unique categories and years
-const categories = Array.from(new Set(projects.map((p) => p.category)));
+// Count the number of projects for each category
+const categoryCounts = projects.reduce((acc, project) => {
+    (project.category || []).forEach((category) => {
+        acc[category] = (acc[category] || 0) + 1;
+    });
+    return acc;
+}, {});
+
+// Create an array of categories and sort by project count
+const categories = Object.keys(categoryCounts).sort((a, b) => categoryCounts[b] - categoryCounts[a]);
+
+// Extract years
 const years = Array.from(new Set(projects.map((p) => new Date(p.date).getFullYear()))).sort().reverse();
 
 // Count the number of projects for each category and year combination
 const projectCounts = projects.reduce((acc, project) => {
     const year = new Date(project.date).getFullYear();
-    const category = project.category;
-
-    // Count for category
-    if (!acc[category]) acc[category] = {};
-    if (!acc[category][year]) acc[category][year] = 0;
-    acc[category][year]++;
-
+    (project.category || []).forEach((category) => {
+        if (!acc[category]) acc[category] = {};
+        if (!acc[category][year]) acc[category][year] = 0;
+        acc[category][year]++;
+    });
     return acc;
 }, {});
 ---
@@ -26,7 +34,7 @@ const projectCounts = projects.reduce((acc, project) => {
     {categories.map((category) => (
             <option value={category}>
                 {category}
-                ({Object.keys(projectCounts[category]).reduce((sum, year) => sum + projectCounts[category][year], 0)})
+                ({categoryCounts[category]})
             </option>
     ))}
 </select>
@@ -47,7 +55,7 @@ const projectCounts = projects.reduce((acc, project) => {
 
 <div id="project-list">
     {projects.map((project) => (
-            <div class="project-item" data-category={project.category} data-year={new Date(project.date).getFullYear()}>
+            <div class="project-item" data-categories={project.category.join(',')} data-year={new Date(project.date).getFullYear()}>
                 <Project
                         visible={project.visible}
                         title={project.title}
@@ -82,11 +90,13 @@ const projectCounts = projects.reduce((acc, project) => {
 
             // Filter and show only the matching projects
             document.querySelectorAll(".project-item").forEach((item) => {
-                const projectCategory = item.dataset.category;
+                const projectCategories = item.dataset.categories.split(',');
                 const projectYear = item.dataset.year;
 
-                if ((category === "all" || projectCategory === category) &&
-                    (year === "all" || projectYear == year)) {
+                const matchesCategory = (category === "all" || projectCategories.includes(category));
+                const matchesYear = (year === "all" || projectYear == year);
+
+                if (matchesCategory && matchesYear) {
                     item.style.display = "block";
                     visibleProjects++;
                 } else {
@@ -176,6 +186,6 @@ select, button {
     color: white;
     border: 1px solid var(--color-text);
     cursor: pointer;
-}
+    }
 
 </style>
