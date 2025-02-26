@@ -1,16 +1,43 @@
 ---
 import Project from "../components/project.astro";
 import projects from "../data/projects.json";
+const categories = Array.from(new Set(projects.map((p) => p.category)));
 ---
 
-{projects.map((project) => (
-<Project
-        visible={project.visible}
-        title={project.title}
-        projectTags={project.projectTags}
-        description={project.description}
-        image={project.image}
-        collaborations={project.collaborations}
-        links={project.links}
-/>
+<select id="categoryFilter">
+    <option value="all">All Categories</option>
+    {categories.map((category) => (
+            <option value={category}>{category}</option>
     ))}
+</select>
+
+<div id="project-list">
+    {projects.map((project) => (
+            <div class="project-item" data-category={project.category}>
+                <Project
+                        visible={project.visible}
+                        title={project.title}
+                        projectTags={project.projectTags}
+                        description={project.description}
+                        image={project.image}
+                        collaborations={project.collaborations}
+                        links={project.links}
+                />
+            </div>
+    ))}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const filterDropdown = document.getElementById("categoryFilter");
+        filterDropdown.addEventListener("change", function () {
+            const selectedCategory = filterDropdown.value;
+            document.querySelectorAll(".project-item").forEach((item) => {
+                item.style.display =
+                    selectedCategory === "all" || item.dataset.category === selectedCategory
+                        ? "block"
+                        : "none";
+            });
+        });
+    });
+</script>
