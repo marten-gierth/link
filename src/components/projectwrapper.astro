@@ -35,20 +35,19 @@ const projectCounts = projects.reduce((acc, project) => {
 <select id="yearFilter">
     <option value="all">All Years</option>
     {years.map((year) => (
-            <option value={year}>
-                {year}
-            </option>
+            <option value={year}>{year}</option>
     ))}
 </select>
 
-<!-- Reset Filter Button -->
-<button id="resetFilterButton">Reset Filter</button>
+<!-- Reset Filter Button (hidden when both filters are "all") -->
+<button id="resetFilterButton" style="display: none;">Reset Filter</button>
+
+<!-- No Projects Message -->
+<p id="noProjectsMessage" style="display: none;">Sorry, no projects are available for the selected filters.</p>
 
 <div id="project-list">
     {projects.map((project) => (
             <div class="project-item" data-category={project.category} data-year={new Date(project.date).getFullYear()}>
-                <span>{project.category}</span>
-                <span>{new Date(project.date).getFullYear()}</span>
                 <Project
                         visible={project.visible}
                         title={project.title}
@@ -71,6 +70,7 @@ const projectCounts = projects.reduce((acc, project) => {
         const categoryFilter = document.getElementById("categoryFilter");
         const yearFilter = document.getElementById("yearFilter");
         const resetFilterButton = document.getElementById("resetFilterButton");
+        const noProjectsMessage = document.getElementById("noProjectsMessage");
 
         // Set the filters based on the URL parameters
         categoryFilter.value = selectedCategory;
@@ -78,30 +78,28 @@ const projectCounts = projects.reduce((acc, project) => {
 
         // Function to filter projects
         function filterProjects(category, year) {
-            let categoryAvailable = new Set();
-            let yearAvailable = new Set();
+            let visibleProjects = 0;
 
-            // Check which projects match the selected filters
+            // Filter and show only the matching projects
             document.querySelectorAll(".project-item").forEach((item) => {
                 const projectCategory = item.dataset.category;
                 const projectYear = item.dataset.year;
 
                 if ((category === "all" || projectCategory === category) &&
-                    (year === "all" || projectYear === year)) {
+                    (year === "all" || projectYear == year)) {
                     item.style.display = "block";
+                    visibleProjects++;
                 } else {
                     item.style.display = "none";
                 }
-
-                // Track available categories and years
-                if (category === "all" || projectCategory === category) {
-                    categoryAvailable.add(projectCategory);
-                }
-
-                if (year === "all" || projectYear == year) {
-                    yearAvailable.add(projectYear);
-                }
             });
+
+            // Show or hide the "No Projects Available" message based on visible projects
+            if (visibleProjects === 0) {
+                noProjectsMessage.style.display = "block";
+            } else {
+                noProjectsMessage.style.display = "none";
+            }
         }
 
         // Filter projects on initial load
@@ -112,11 +110,24 @@ const projectCounts = projects.reduce((acc, project) => {
             const newCategory = categoryFilter.value;
             const newYear = yearFilter.value;
             const newUrl = new URL(window.location);
-            newUrl.searchParams.set("category", newCategory);
-            newUrl.searchParams.set("year", newYear);
+
+            // Remove category and year from the URL if they are "all"
+            if (newCategory === 'all') newUrl.searchParams.delete("category");
+            else newUrl.searchParams.set("category", newCategory);
+
+            if (newYear === 'all') newUrl.searchParams.delete("year");
+            else newUrl.searchParams.set("year", newYear);
+
             window.history.pushState({}, "", newUrl);
 
             filterProjects(newCategory, newYear);
+
+            // Show or hide the reset button based on filters
+            if (newCategory === "all" && newYear === "all") {
+                resetFilterButton.style.display = "none";
+            } else {
+                resetFilterButton.style.display = "inline-block";
+            }
         }
 
         // Update URL and filter projects when category or year changes
@@ -137,6 +148,34 @@ const projectCounts = projects.reduce((acc, project) => {
 
             // Show all projects
             filterProjects("all", "all");
+
+            // Hide the reset button
+            resetFilterButton.style.display = "none";
         });
+
+        // Show the reset button if there are any applied filters
+        if (selectedCategory !== 'all' || selectedYear !== 'all') {
+            resetFilterButton.style.display = 'inline-block';
+        }
     });
 </script>
+
+<style>
+select, button {
+    margin: 0.17rem 0 0.17rem 0.17rem;
+    padding: .3rem 0.6rem;
+    font-size: 1.1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--color-text);
+    background-color: white;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+#resetFilterButton {
+    background-color: var(--color-text);
+    color: white;
+    border: 1px solid var(--color-text);
+    cursor: pointer;
+}
+
+</style>
