@@ -4,7 +4,7 @@ import projects from "../data/projects.json";
 
 // Extract unique categories and years
 const categories = Array.from(new Set(projects.map((p) => p.category)));
-const years = Array.from(new Set(projects.map((p) => new Date(p.date).getFullYear()))).sort();
+const years = Array.from(new Set(projects.map((p) => new Date(p.date).getFullYear()))).sort().reverse();
 
 // Count the number of projects for each category and year combination
 const projectCounts = projects.reduce((acc, project) => {
