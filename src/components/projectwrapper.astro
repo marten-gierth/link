@@ -23,7 +23,6 @@ const projectCounts = projects.reduce((acc, project) => {
 
     return acc;
 }, {});
-
 ---
 
 <!-- Dropdown for Category Filter -->
@@ -31,7 +30,8 @@ const projectCounts = projects.reduce((acc, project) => {
     <option value="all">All Categories</option>
     {categories.map((category) => (
             <option value={category}>
-                {category} ({Object.keys(projectCounts[category]).reduce((sum, year) => sum + projectCounts[category][year], 0)})
+                {category}
+                ({Object.keys(projectCounts[category]).reduce((sum, year) => sum + projectCounts[category][year], 0)})
             </option>
     ))}
 </select>
@@ -124,28 +124,21 @@ const projectCounts = projects.reduce((acc, project) => {
         // Filter projects on initial load
         filterProjects(selectedCategory, selectedYear);
 
+        // Function to update the URL and filter projects
+        function updateFilterAndURL() {
+            const newCategory = categoryFilter.value;
+            const newYear = yearFilter.value;
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set("category", newCategory);
+            newUrl.searchParams.set("year", newYear);
+            window.history.pushState({}, "", newUrl);
+
+            filterProjects(newCategory, newYear);
+        }
+
         // Update URL and filter projects when category or year changes
-        categoryFilter.addEventListener("change", function () {
-            const newCategory = categoryFilter.value;
-            const newYear = yearFilter.value;
-            const newUrl = new URL(window.location);
-            newUrl.searchParams.set("category", newCategory);
-            newUrl.searchParams.set("year", newYear);
-            window.history.pushState({}, "", newUrl);
-
-            filterProjects(newCategory, newYear);
-        });
-
-        yearFilter.addEventListener("change", function () {
-            const newCategory = categoryFilter.value;
-            const newYear = yearFilter.value;
-            const newUrl = new URL(window.location);
-            newUrl.searchParams.set("category", newCategory);
-            newUrl.searchParams.set("year", newYear);
-            window.history.pushState({}, "", newUrl);
-
-            filterProjects(newCategory, newYear);
-        });
+        categoryFilter.addEventListener("change", updateFilterAndURL);
+        yearFilter.addEventListener("change", updateFilterAndURL);
 
         // Reset the filters when the reset button is clicked
         resetFilterButton.addEventListener("click", function () {
