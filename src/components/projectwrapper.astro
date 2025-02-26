@@ -11,15 +11,10 @@ const projectCounts = projects.reduce((acc, project) => {
     const year = new Date(project.date).getFullYear();
     const category = project.category;
 
-    // Count for category per year
+    // Count for category
     if (!acc[category]) acc[category] = {};
     if (!acc[category][year]) acc[category][year] = 0;
     acc[category][year]++;
-
-    // Count for all categories per year
-    if (!acc["all"]) acc["all"] = {};
-    if (!acc["all"][year]) acc["all"][year] = 0;
-    acc["all"][year]++;
 
     return acc;
 }, {});
@@ -41,7 +36,7 @@ const projectCounts = projects.reduce((acc, project) => {
     <option value="all">All Years</option>
     {years.map((year) => (
             <option value={year}>
-                {year} ({projectCounts["all"][year]})
+                {year}
             </option>
     ))}
 </select>
@@ -106,18 +101,6 @@ const projectCounts = projects.reduce((acc, project) => {
                 if (year === "all" || projectYear == year) {
                     yearAvailable.add(projectYear);
                 }
-            });
-
-            // Ensure categories are always clickable, even with no projects for the selected year
-            categoryFilter.querySelectorAll("option").forEach((option) => {
-                const category = option.value;
-                option.disabled = false; // Always make options clickable
-            });
-
-            // Ensure years are always clickable, even with no projects for the selected category
-            yearFilter.querySelectorAll("option").forEach((option) => {
-                const year = option.value;
-                option.disabled = false; // Always make options clickable
             });
         }
 
