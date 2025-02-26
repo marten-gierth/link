@@ -1,9 +1,13 @@
 ---
 import Project from "../components/project.astro";
 import projects from "../data/projects.json";
+
+// Extrahiere eindeutige Kategorien und Jahre
 const categories = Array.from(new Set(projects.map((p) => p.category)));
+const years = Array.from(new Set(projects.map((p) => new Date(p.date).getFullYear()))).sort();
 ---
 
+<!-- Dropdown für Kategorie-Filter -->
 <select id="categoryFilter">
     <option value="all">All Categories</option>
     {categories.map((category) => (
@@ -11,9 +15,19 @@ const categories = Array.from(new Set(projects.map((p) => p.category)));
     ))}
 </select>
 
+<!-- Dropdown für Jahres-Filter -->
+<select id="yearFilter">
+    <option value="all">All Years</option>
+    {years.map((year) => (
+            <option value={year}>{year}</option>
+    ))}
+</select>
+
 <div id="project-list">
     {projects.map((project) => (
-            <div class="project-item" data-category={project.category}>
+            <div class="project-item" data-category={project.category} data-year={new Date(project.date).getFullYear()}>
+                <span>{project.category}</span>
+                <span>{new Date(project.date).getFullYear()}</span>
                 <Project
                         visible={project.visible}
                         title={project.title}
@@ -29,35 +43,65 @@ const categories = Array.from(new Set(projects.map((p) => p.category)));
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        // URL-Parameter auslesen
         const urlParams = new URLSearchParams(window.location.search);
         const selectedCategory = urlParams.get('category') || 'all';
+        const selectedYear = urlParams.get('year') || 'all';
 
-        // Set the dropdown to match the URL category (if any)
-        const filterDropdown = document.getElementById("categoryFilter");
-        filterDropdown.value = selectedCategory;
+        // Setze die Filter-Dropdowns basierend auf der URL
+        const categoryFilter = document.getElementById("categoryFilter");
+        const yearFilter = document.getElementById("yearFilter");
 
-        // Filter projects based on the selected category
+        categoryFilter.value = selectedCategory;
+        yearFilter.value = selectedYear;
+
+        // Projekte filtern basierend auf Kategorie und Jahr
         document.querySelectorAll(".project-item").forEach((item) => {
             const projectCategory = item.dataset.category;
+            const projectYear = item.dataset.year;
+
             item.style.display =
-                selectedCategory === "all" || projectCategory === selectedCategory
+                (selectedCategory === "all" || projectCategory === selectedCategory) &&
+                (selectedYear === "all" || projectYear === selectedYear)
                     ? "block"
                     : "none";
         });
 
-        // Update project visibility when the dropdown changes
-        filterDropdown.addEventListener("change", function () {
-            const selectedCategory = filterDropdown.value;
+        // Wenn ein Filter geändert wird, URL aktualisieren und Projekte filtern
+        categoryFilter.addEventListener("change", function () {
+            const newCategory = categoryFilter.value;
+            const newYear = yearFilter.value;
             const newUrl = new URL(window.location);
-            newUrl.searchParams.set("category", selectedCategory);
+            newUrl.searchParams.set("category", newCategory);
+            newUrl.searchParams.set("year", newYear);
             window.history.pushState({}, "", newUrl);
 
+            filterProjects(newCategory, newYear);
+        });
+
+        yearFilter.addEventListener("change", function () {
+            const newCategory = categoryFilter.value;
+            const newYear = yearFilter.value;
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set("category", newCategory);
+            newUrl.searchParams.set("year", newYear);
+            window.history.pushState({}, "", newUrl);
+
+            filterProjects(newCategory, newYear);
+        });
+
+        // Funktion zum Filtern der Projekte
+        function filterProjects(category, year) {
             document.querySelectorAll(".project-item").forEach((item) => {
+                const projectCategory = item.dataset.category;
+                const projectYear = item.dataset.year;
+
                 item.style.display =
-                    selectedCategory === "all" || item.dataset.category === selectedCategory
+                    (category === "all" || projectCategory === category) &&
+                    (year === "all" || projectYear === year)
                         ? "block"
                         : "none";
             });
-        });
+        }
     });
 </script>
