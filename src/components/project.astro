@@ -3,144 +3,79 @@ import ChipLink from "./ChipLink.astro";
 interface Props {
     visible?: boolean;
     title?: string;
-    projectTag1?: string;
-    projectTag2?: string;
-    projectTag3?: string;
-    projectTag4?: string;
-    projectTag5?: string;
-    projectTag6?: string;
-
-    secondTitle?: string;
+    projectTags?: string[];
     description?: string;
-
-    collaboration?: string;
-    collaborationName1?: string;
-    collaborationName1Link?: string;
-    collaborationmid?: string;
-    collaborationName2?: string;
-    collaborationName2Link?: string;
-    collaborationend?: string;
-
-    noimage?: boolean;
+    collaborations?: { name: string; link: string }[];
     image?: string;
     imagelink?: string;
-
-    url1?: string;
-    chipType1?: string;
-    chipTypeColor1?: string;
-    chipText1?: string;
-
-    url2?: string;
-    chipType2?: string;
-    chipTypeColor2?: string;
-    chipText2?: string;
-
-    url3?: string;
-    chipType3?: string;
-    chipTypeColor3?: string;
-    chipText3?: string;
+    links?: { url: string; chipType: string; chipColor: string; chipText: string }[];
 }
 
 const {
     visible = true,
     title = "",
-    projectTag1 = "",
-    projectTag2 = "",
-    projectTag3 = "",
-    projectTag4 = "",
-    projectTag5 = "",
-    projectTag6 = "",
+    projectTags = [],
     description = "",
-
-    collaborationName1 = "",
-    collaborationName1Link = "",
-    collaborationmid = "",
-    collaborationName2 = "",
-    collaborationName2Link = "",
-    collaborationend = "",
-
-    noimage = false,
+    collaborations = [],
     image = "",
-
-    url1 = "",
-    imagelink = url1,
-    chipType1 = "",
-    chipTypeColor1 = "",
-    chipText1 = "",
-
-    url2 = "",
-    chipType2 = "",
-    chipTypeColor2 = "",
-    chipText2 = "",
-
-    url3 = "",
-    chipType3 = "",
-    chipTypeColor3 = "",
-    chipText3 = ""
-
+    links = [],
 } = Astro.props;
-const noImage = !image;
+
+const collabText = collaborations
+    .map((collab) => `<a href="${collab.link}" target="_blank">${collab.name}</a>`)
+    .join(" and ");
+
+const linksArray = links.map((link) => ({
+    url: link.url,
+    chipType: link.chipType,
+    chipColor: link.chipColor,
+    chipText: link.chipText
+}));
+
+const imagelink = links.length > 0 ? links[0].url : "";
 ---
 {visible && (
-<div class={`project-container ${noimage ? "project-container-noimage" : ""}`}>
+<div class={image?.trim() ? "project-container" : "project-container-noimage"}>
     <div class="project-description">
         <h2>
             {title}
         </h2>
         <p class="project-tag">
-            {projectTag1 && projectTag1}
-            {projectTag2 && ', ' + projectTag2}
-            {projectTag3 && ', ' + projectTag3}
-            {projectTag4 && ', ' + projectTag4}
-            {projectTag5 && ', ' + projectTag5}
-            {projectTag6 && ', ' + projectTag6}
+            <span>{projectTags.join(", ")}</span>
         </p>
-        <p class="project-description-text">{description}
-            {collaborationName1Link && (
-                    <>
-                        In collaboration with
-                        <a href={`${collaborationName1Link}`}
-                           target="_blank">{collaborationName1}</a> {collaborationmid}
-                        <a href={`${collaborationName2Link}`}
-                           target="_blank">{collaborationName2}</a> {collaborationend}
-                    </>
-            )}
-        </p>
-        <div class="linkchipContainer">
-            <div>
-                {url1 &&
-                        <ChipLink chipType={chipType1} chipText={chipText1} chipTypeColor={chipTypeColor1} url={url1} ?
-                                  {url1} :
-                                  {}
-                                  urlNewTab=true iconRight="/assets/arrow-right.svg" backgroundColor={chipTypeColor1}/>}
-            </div>
-            <div>
-                {url2 &&
-                        <ChipLink chipType={chipType2} chipText={chipText2} chipTypeColor={chipTypeColor2} url={url2} ?
-                                  {url2} :
-                                  {}
-                                  urlNewTab=true iconRight="/assets/arrow-right.svg" backgroundColor={chipTypeColor2}/>}
-            </div>
-            <div>
-                {url3 &&
-                        <ChipLink chipType={chipType3} chipText={chipText3} chipTypeColor={chipTypeColor3} url={url3} ?
-                                  {url3} :
-                                  {}
-                                  urlNewTab=true iconRight="/assets/arrow-right.svg" backgroundColor={chipTypeColor3}/>}
-            </div>
-        </div>
-    </div>
-    { image ? (
-        imagelink ? (
-        <a className="imageLink" href={imagelink} target="_blank" rel="noopener noreferrer">
-            <img src={image} alt={title} className="selectDisable"/>
-        </a>
-            ) : (
-        <img src={image} alt={title} className="selectDisable"/>
-            )
-        ) : null }
-        </div>
+        <p class="project-description-text"
+           set:html={`${description}${collaborations.length > 0 ? ` In collaboration with ${collabText}.` : ""}`}></p>
+
+        {linksArray.length > 0 && (
+                <div class="linkchipContainer">
+                    {linksArray.map((link) => (
+                            <div>
+                                <ChipLink
+                                        chipType={link.chipType}
+                                        chipText={link.chipText}
+                                        chipTypeColor={link.chipColor}
+                                        url={link.url}
+                                        urlNewTab={true}
+                                        iconRight="/assets/arrow-right.svg"
+                                        backgroundColor={link.chipColor}
+                                />
+                            </div>
+                    ))}
+                </div>
         )}
+    </div>
+
+    {image && (
+        imagelink ? (
+                <a class="imageLink" href={imagelink} target="_blank" rel="noopener noreferrer">
+                    <img src={image} alt={title}/>
+                </a>
+        ) : (
+                <img src={image} alt={title}/>
+        )
+    )}
+</div>
+    )}
 
 <style>
     .project-container {
@@ -199,7 +134,6 @@ const noImage = !image;
         padding: 1rem 0;
     }
 
-
     .project-description-text {
         margin-top: 1.2rem !important;
     }
@@ -229,12 +163,26 @@ const noImage = !image;
         }
     }
 
+    .project-container-noimage {
+        display: flex;
+        flex-direction: column;
+        margin: 1.5rem 0.5rem 0 0.5rem;
+        padding: 0 2rem 0rem 2rem;
+        border-radius: 3rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
     @media (max-width: 1280px) {
         .project-container {
             border-radius: 1rem;
         }
 
         .project-container h2 {
+            font-size: 2rem;
+        }
+
+        .project-container-noimage h2 {
             font-size: 2rem;
         }
 
@@ -255,7 +203,6 @@ const noImage = !image;
             transform: scale(1.015);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
             border-radius: 0.75rem;
-
         }
     }
 
@@ -265,5 +212,4 @@ const noImage = !image;
         gap: 0.3rem;
         margin: 1rem 0;
     }
-
 </style>

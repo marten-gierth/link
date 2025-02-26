@@ -1,6 +1,5 @@
 [
   {
-    "id": "caveman-hits-giraffe",
     "visible": true,
     "title": "Caveman hits Giraffe in a Car",
     "category": "Game",
@@ -17,7 +16,6 @@
     ]
   },
   {
-    "id": "pay-to-win-mobile-games",
     "visible": true,
     "title": "Pay-to-Win in Mobile-Games",
     "category": "Video",
@@ -29,7 +27,6 @@
     ]
   },
   {
-    "id": "vacation-animation",
     "visible": true,
     "title": "Vacation",
     "category": "Video",
@@ -41,7 +38,6 @@
     ]
   },
   {
-    "id": "dresden-is-unreal",
     "visible": true,
     "title": "Dresden is UNreal",
     "category": "Video",
@@ -56,7 +52,6 @@
     ]
   },
   {
-    "id": "jurassic-park-sound-design",
     "visible": true,
     "title": "Jurassic Park 1993",
     "category": "Video",
@@ -68,7 +63,6 @@
     ]
   },
   {
-    "id": "pearl-western-style",
     "visible": true,
     "title": "Pearl Western Style",
     "category": "Video",
@@ -84,7 +78,6 @@
     ]
   },
   {
-    "id": "pearl-hyper-cars",
     "visible": true,
     "title": "Pearl Hyper Cars",
     "category": "Video",
@@ -100,13 +93,11 @@
     ]
   },
   {
-    "id": "photo-editing",
     "visible": true,
     "title": "Photo Editing",
     "category": "Other",
     "projectTags": ["Image Editing", "Hobby projects"],
     "description": "I enjoy editing photos in Adobe Lightroom. Check out my profile for more!",
-    "noImage": true,
     "image": "",
     "links": [
       { "url": "https://lightroom.adobe.com/u/martengierth/", "chipType": "Lightroom", "chipColor": "#001e37", "chipText": "Profile" }
