@@ -12,7 +12,7 @@
 
 
     { "id": 100, "radius": 12, "label": "projects", "link": "projects"},
-    { "id": 101, "radius": 10, "label": "game", "link": "projects"  },
+    { "id": 101, "radius": 10, "label": "game", "link": "projects?category=Game"  },
     { "id": 102, "radius": 10, "label": "video", "link": "projects"  },
     { "id": 103, "radius": 10, "label": "website", "link": "projects" },
     { "id": 104, "radius": 10, "label": "photos", "link": "projects" }

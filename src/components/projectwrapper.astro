@@ -29,9 +29,29 @@ const categories = Array.from(new Set(projects.map((p) => p.category)));
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedCategory = urlParams.get('category') || 'all';
+
+        // Set the dropdown to match the URL category (if any)
         const filterDropdown = document.getElementById("categoryFilter");
+        filterDropdown.value = selectedCategory;
+
+        // Filter projects based on the selected category
+        document.querySelectorAll(".project-item").forEach((item) => {
+            const projectCategory = item.dataset.category;
+            item.style.display =
+                selectedCategory === "all" || projectCategory === selectedCategory
+                    ? "block"
+                    : "none";
+        });
+
+        // Update project visibility when the dropdown changes
         filterDropdown.addEventListener("change", function () {
             const selectedCategory = filterDropdown.value;
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set("category", selectedCategory);
+            window.history.pushState({}, "", newUrl);
+
             document.querySelectorAll(".project-item").forEach((item) => {
                 item.style.display =
                     selectedCategory === "all" || item.dataset.category === selectedCategory
