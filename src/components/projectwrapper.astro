@@ -27,35 +27,50 @@ const projectCounts = projects.reduce((acc, project) => {
     return acc;
 }, {});
 ---
+<div class="filter-wrapper">
+    <!-- Mobile Dropdown for Filters -->
+    <details open id="filterDropdown">
+        <summary>Filters</summary>
+        <div class="filter-options">
+            <select id="categoryFilter">
+                <option value="all">All Categories</option>
+                {categories.map((category) => (
+                        <option value={category}>
+                            {category} ({categoryCounts[category]})
+                        </option>
+                ))}
+            </select>
 
-<!-- Dropdown for Category Filter -->
-<select id="categoryFilter">
-    <option value="all">All Categories</option>
-    {categories.map((category) => (
-            <option value={category}>
-                {category}
-                ({categoryCounts[category]})
-            </option>
-    ))}
-</select>
+            <select id="yearFilter">
+                <option value="all">All Years</option>
+                {years.map((year) => (
+                        <option value={year}>{year}</option>
+                ))}
+            </select>
 
-<!-- Dropdown for Year Filter -->
-<select id="yearFilter">
-    <option value="all">All Years</option>
-    {years.map((year) => (
-            <option value={year}>{year}</option>
-    ))}
-</select>
+            <select id="sortFilter">
+                <option value="default">Sort By</option>
+                <option value="az">Alphabetical (A-Z)</option>
+                <option value="za">Alphabetical (Z-A)</option>
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="category">Category</option>
+            </select>
 
-<!-- Reset Filter Button (hidden when both filters are "all") -->
-<button id="resetFilterButton" style="display: none;">Reset Filter</button>
+            <button id="resetFilterButton" style="display: none;">Reset Filter</button>
+        </div>
+    </details>
+</div>
 
 <!-- No Projects Message -->
-<p id="noProjectsMessage" style="display: none;">Sorry, no projects are available for the selected filters.</p>
+<div id="noProjectsMessage" style="display: none;">
+    <p>Sorry, no projects are available for the selected filters.</p>
+</div>
 
 <div id="project-list">
     {projects.map((project) => (
-            <div class="project-item" data-categories={project.category.join(',')} data-year={new Date(project.date).getFullYear()}>
+            <div class="project-item" data-categories={project.category.join(',')}
+                 data-year={new Date(project.date).getFullYear()}>
                 <Project
                         visible={project.visible}
                         title={project.title}
@@ -69,27 +84,94 @@ const projectCounts = projects.reduce((acc, project) => {
     ))}
 </div>
 
+
+<style>
+    select, button {
+        margin: 0.17rem 0 0.17rem 0.17rem;
+        padding: .3rem 0.6rem;
+        font-size: 1.1rem;
+        border-radius: 1rem;
+        border: 1px solid var(--color-text);
+        background-color: white;
+        font-family: 'Inter', sans-serif;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    #resetFilterButton {
+        background-color: var(--color-text);
+        color: white;
+        border: 1px solid var(--color-text);
+        cursor: pointer;
+    }
+    #filterDropdown {
+        font-family: 'Inter', serif;
+    }
+    .filter-wrapper {
+        display: flex;
+        flex-wrap: wrap-reverse;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 749px) {
+        .filter-wrapper {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .filter-wrapper details {
+            width: 100%;
+        }
+        .filter-wrapper summary {
+            cursor: pointer;
+            padding: 10px;
+        }
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-radius: 5px;
+            margin: 8px;
+        }
+        #filterDropdown {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+        }
+    }
+
+    @media (min-width: 750px) {
+        .filter-wrapper {
+            flex-direction: row;
+        }
+        .filter-options {
+            display: flex;
+            gap: 10px;
+        }
+    }
+</style>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
         const selectedCategory = urlParams.get('category') || 'all';
         const selectedYear = urlParams.get('year') || 'all';
+        const selectedSort = urlParams.get('sort') || 'default';
 
         const categoryFilter = document.getElementById("categoryFilter");
         const yearFilter = document.getElementById("yearFilter");
+        const sortFilter = document.getElementById("sortFilter");
         const resetFilterButton = document.getElementById("resetFilterButton");
         const noProjectsMessage = document.getElementById("noProjectsMessage");
 
-        // Set the filters based on the URL parameters
         categoryFilter.value = selectedCategory;
         yearFilter.value = selectedYear;
+        sortFilter.value = selectedSort;
 
-        // Function to filter projects
-        function filterProjects(category, year) {
+        function filterProjects(category, year, sort) {
+            let projectsArray = Array.from(document.querySelectorAll(".project-item"));
             let visibleProjects = 0;
 
-            // Filter and show only the matching projects
-            document.querySelectorAll(".project-item").forEach((item) => {
+            projectsArray.forEach((item) => {
                 const projectCategories = item.dataset.categories.split(',');
                 const projectYear = item.dataset.year;
 
@@ -104,88 +186,77 @@ const projectCounts = projects.reduce((acc, project) => {
                 }
             });
 
-            // Show or hide the "No Projects Available" message based on visible projects
-            if (visibleProjects === 0) {
-                noProjectsMessage.style.display = "block";
-            } else {
-                noProjectsMessage.style.display = "none";
-            }
+            // Sorting logic
+            projectsArray = projectsArray.filter(item => item.style.display === "block");
+            projectsArray.sort((a, b) => {
+                const titleA = a.querySelector("h2")?.innerText.toLowerCase() || "";
+                const titleB = b.querySelector("h2")?.innerText.toLowerCase() || "";
+                const dateA = new Date(a.dataset.year).getTime();
+                const dateB = new Date(b.dataset.year).getTime();
+
+                if (sort === "az") return titleA.localeCompare(titleB);
+                if (sort === "za") return titleB.localeCompare(titleA);
+                if (sort === "newest") return dateB - dateA;
+                if (sort === "oldest") return dateA - dateB;
+                if (sort === "category") return a.dataset.categories.split(',')[0].localeCompare(b.dataset.categories.split(',')[0]);
+            });
+
+            // Apply sorted elements back into DOM
+            const container = document.getElementById("project-list");
+            container.innerHTML = "";
+            projectsArray.forEach(item => container.appendChild(item));
+
+            noProjectsMessage.style.display = visibleProjects === 0 ? "block" : "none";
         }
 
-        // Filter projects on initial load
-        filterProjects(selectedCategory, selectedYear);
-
-        // Function to update the URL and filter projects
         function updateFilterAndURL() {
             const newCategory = categoryFilter.value;
             const newYear = yearFilter.value;
+            const newSort = sortFilter.value;
             const newUrl = new URL(window.location);
 
-            // Remove category and year from the URL if they are "all"
             if (newCategory === 'all') newUrl.searchParams.delete("category");
             else newUrl.searchParams.set("category", newCategory);
 
             if (newYear === 'all') newUrl.searchParams.delete("year");
             else newUrl.searchParams.set("year", newYear);
 
-            window.history.pushState({}, "", newUrl);
+            if (newSort === 'default') newUrl.searchParams.delete("sort");
+            else newUrl.searchParams.set("sort", newSort);
 
-            filterProjects(newCategory, newYear);
+            window.location.href = newUrl.toString();
+            filterProjects(newCategory, newYear, newSort);
 
-            // Show or hide the reset button based on filters
-            if (newCategory === "all" && newYear === "all") {
-                resetFilterButton.style.display = "none";
-            } else {
-                resetFilterButton.style.display = "inline-block";
-            }
+            resetFilterButton.style.display = (newCategory !== "all" || newYear !== "all" || newSort !== "default") ? "inline-block" : "none";
         }
 
-        // Update URL and filter projects when category or year changes
+        filterProjects(selectedCategory, selectedYear, selectedSort);
+
         categoryFilter.addEventListener("change", updateFilterAndURL);
         yearFilter.addEventListener("change", updateFilterAndURL);
+        sortFilter.addEventListener("change", updateFilterAndURL);
 
-        // Reset the filters when the reset button is clicked
         resetFilterButton.addEventListener("click", function () {
-            // Reset dropdown values to "all"
             categoryFilter.value = "all";
             yearFilter.value = "all";
+            sortFilter.value = "default";
 
-            // Clear URL parameters for category and year
             const newUrl = new URL(window.location);
             newUrl.searchParams.delete("category");
             newUrl.searchParams.delete("year");
-            window.history.pushState({}, "", newUrl);
+            newUrl.searchParams.delete("sort");
+            window.location.href = newUrl.toString();
 
-            // Show all projects
-            filterProjects("all", "all");
-
-            // Hide the reset button
+            filterProjects("all", "all", "default");
             resetFilterButton.style.display = "none";
+
+            categoryFilter.dispatchEvent(new Event("change"));
+            yearFilter.dispatchEvent(new Event("change"));
+            sortFilter.dispatchEvent(new Event("change"));
         });
 
-        // Show the reset button if there are any applied filters
-        if (selectedCategory !== 'all' || selectedYear !== 'all') {
+        if (selectedCategory !== 'all' || selectedYear !== 'all' || selectedSort !== 'default') {
             resetFilterButton.style.display = 'inline-block';
         }
     });
 </script>
-
-<style>
-select, button {
-    margin: 0.17rem 0 0.17rem 0.17rem;
-    padding: .3rem 0.6rem;
-    font-size: 1.1rem;
-    border-radius: 1rem;
-    border: 1px solid var(--color-text);
-    background-color: white;
-    font-family: 'Inter', sans-serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-#resetFilterButton {
-    background-color: var(--color-text);
-    color: white;
-    border: 1px solid var(--color-text);
-    cursor: pointer;
-    }
-
-</style>
