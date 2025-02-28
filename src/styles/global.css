@@ -87,7 +87,10 @@ p {
 
 a {
     color: var(--color-a);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 2px;
+    white-space: nowrap;
 }
 
 .icon-large {
