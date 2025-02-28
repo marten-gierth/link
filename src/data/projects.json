@@ -3,7 +3,7 @@
     "visible": true,
     "title": "Caveman hits Giraffe in a Car",
     "category": ["Game"],
-    "date": "01.01.2025",
+    "date": "04.01.2025",
     "projectTags": ["Game", "Action Roguelite", "Single-player", "Hand-drawn", "Unity", "University project"],
     "description": "Slash, survive and get tougher - a wacky action roguelike with hand-drawn graphics and a caveman on the hunt for monsters! Just when you think you've seen it all, here it comes: a giraffe in a car.",
     "collaborations": [
@@ -18,9 +18,21 @@
   },
   {
     "visible": true,
+    "title": "Photo Editing",
+    "category": ["Photo"],
+    "date": "01.01.2025",
+    "projectTags": ["Image Editing", "Hobby projects"],
+    "description": "I enjoy editing photos in Adobe Lightroom. Check out my profile for more!",
+    "image": "",
+    "links": [
+      { "url": "https://lightroom.adobe.com/u/martengierth/", "chipType": "Lightroom", "chipColor": "#001e37", "chipText": "Profile" }
+    ]
+  },
+  {
+    "visible": true,
     "title": "Pay-to-Win in Mobile-Games",
     "category": ["Video","Video Essay"],
-    "date": "01.01.2024",
+    "date": "03.12.2024",
     "projectTags": ["Video Essay", "German", "University project"],
     "description": "In this German video essay, I explore the pay-to-win model in mobile games. I discuss the ethical issues surrounding manipulation and the game mechanics designed to maximize in-game purchases. Additionally, I examine how real-money purchases give players advantages and their impact on the gaming community.",
     "image": "/assets/projects/Pay-to-Win-in-Mobile-Games.jpg",
@@ -32,7 +44,7 @@
     "visible": true,
     "title": "Vacation",
     "category": ["Video","Animation"],
-    "date": "01.01.2024",
+    "date": "03.12.2024",
     "projectTags": ["Animation", "Vector", "Sound Design", "University project"],
     "description": "A fictional soft drink ad, brought to life through a dynamic vector animation in After Effects with sound design.",
     "image": "/assets/projects/Vacation.jpg",
@@ -44,7 +56,7 @@
     "visible": true,
     "title": "Dresden is UNreal",
     "category": ["Video","Hyperlapse"],
-    "date": "01.01.2023",
+    "date": "03.11.2024",
     "projectTags": ["Video","Hyperlapse", "University project"],
     "description": "A fast-paced journey through Dresden - match cuts, hyperlapses, and vibrant street art blend into a seamless visual flow.",
     "collaborations": [
@@ -55,11 +67,22 @@
       { "url": "https://youtu.be/fnPlhtcw6DQ", "chipType": "Youtube", "chipColor": "#FF0000", "chipText": "Watch" }
     ]
   },
+  {  "visible": true,
+    "title": "Peaceful Rainy Vibes",
+    "category": ["Video", "Music"],
+    "date": "10.12.2023",
+    "projectTags": ["Video", "Music", "Lo-Fi"],
+    "description": "Rainy Lo-Fi beat to study to - a relaxing, atmospheric track.",
+    "image": "/assets/projects/Peaceful-Rainy-Vibes.jpg",
+    "links": [
+      { "url": "https://youtu.be/RHocdf9KYBI", "chipType": "Youtube", "chipColor": "#FF0000", "chipText": "Watch" }
+    ]
+  },
   {
     "visible": true,
     "title": "Jurassic Park 1993",
     "category": ["Video","Sound Design"],
-    "date": "01.01.2023",
+    "date": "03.03.2023",
     "projectTags": ["Video","Sound Design", "University project"],
     "description": "For this project, I took on the challenge of creating my own sound design for iconic scenes from the film. All sounds – from the roaring T-Rex to clattering pots – come from the FreeSounds.org library and were carefully timed to recreate the atmosphere of the original.",
     "image": "/assets/projects/Jurassic-Park-1993.jpg",
@@ -71,7 +94,7 @@
     "visible": true,
     "title": "Pearl Western Style",
     "category": ["Video"],
-    "date": "01.01.2023",
+    "date": "10.18.2023",
     "projectTags": ["Video", "Sound Design", "Challenge", "University project"],
     "description": "A cinematic fragrance ad, created in a three-day challenge for the fictional project Pearl. Filmed in a retired bank vault.",
     "collaborations": [
@@ -87,7 +110,7 @@
     "visible": true,
     "title": "Pearl Hyper Cars",
     "category": ["Video"],
-    "date": "01.01.2023",
+    "date": "10.18.2023",
     "projectTags": ["Video", "Voice Over", "Challenge", "University project"],
     "description": "A cinematic toy car ad, crafted in a three-day challenge for the fictional project PEAL. Inspired by over-the-top childhood toy commercials, it’s a high-energy ride—dramatic, fast-paced, and just a little too epic for a tiny car.",
     "collaborations": [
@@ -97,18 +120,6 @@
     "image": "/assets/projects/Pearl-Hyper-Cars.jpg",
     "links": [
       { "url": "https://youtu.be/i9LUcAnMrXs", "chipType": "Youtube", "chipColor": "#FF0000", "chipText": "Watch" }
-    ]
-  },
-  {
-    "visible": true,
-    "title": "Photo Editing",
-    "category": ["Photo"],
-    "date": "01.01.2025",
-    "projectTags": ["Image Editing", "Hobby projects"],
-    "description": "I enjoy editing photos in Adobe Lightroom. Check out my profile for more!",
-    "image": "",
-    "links": [
-      { "url": "https://lightroom.adobe.com/u/martengierth/", "chipType": "Lightroom", "chipColor": "#001e37", "chipText": "Profile" }
     ]
   }
 ]

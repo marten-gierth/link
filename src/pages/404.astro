@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import Head from "../components/Head.astro";
+import SettingsHomeTheme from '../components/SettingsHomeTheme.astro';
+---
+<html lang="en">
+<head>
+    <Head title="Marten Gierth | Portfolio"/>
+</head>
+<body>
+<main>
+    <div class="censored-container">
+        <h1>Oops! Page not found.</h1>
+
+        <p>
+            It looks like the page you’re looking for doesn’t exist or has been moved. Check the URL for typos or go
+            back to the homepage.
+        </p>
+    </div>
+    <div class="linkContainer">
+        <SettingsHomeTheme/>
+    </div>
+</main>
+</body>
+</html>
+
+<style>
+    .h1 {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .censored-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2rem;
+        padding-top: min(50vh, calc(10vh));
+    }
+
+    .linkContainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 4rem;
+    }
+
+    .linkContainer div {
+        margin-top: 1rem;
+    }
+</style>
