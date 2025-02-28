@@ -86,8 +86,9 @@ const imagelink = links.length > 0 ? links[0].url : "";
         margin: 1.5rem 0.5rem 0 0.5rem;
         padding: 0 2rem 0 2rem;
         border-radius: 3rem;
-        background-color: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: var(--project-container-background-color);
+        box-shadow: 0 0 10px var(--box-shadow-color);
+        transition: background-color 0.3s linear;
     }
 
     .project-container img {
@@ -107,14 +108,14 @@ const imagelink = links.length > 0 ? links[0].url : "";
     .project-container a img {
         display: block;
         filter: grayscale(0.6);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 8px var(--box-shadow-color-img);
         transition: transform 0.15s ease-in, border-radius 0.1s ease-in, box-shadow 0.3s linear, filter 0.5s linear;
     }
 
     .project-container a:hover img {
         transform: scale(1.015);
         filter: grayscale(0);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 4px 8px var(--box-shadow-color-img-hover);
         border-radius: 1.15rem;
     }
 
@@ -140,7 +141,7 @@ const imagelink = links.length > 0 ? links[0].url : "";
     }
 
     p.project-tag {
-        color: rgba(0, 0, 0, 0.65);
+        color: var(--project-tag:);
         font-size: 1rem;
         margin: 0;
         padding: 0 !important;
@@ -170,8 +171,10 @@ const imagelink = links.length > 0 ? links[0].url : "";
         margin: 1.5rem 0.5rem 0 0.5rem;
         padding: 0 2rem 0 2rem;
         border-radius: 3rem;
-        background-color: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: var(--project-container-background-color);
+        box-shadow: 0 0 10px var(--box-shadow-color);
+
+        transition: background-color 0.3s linear;
     }
 
     @media (max-width: 1280px) {
@@ -190,7 +193,7 @@ const imagelink = links.length > 0 ? links[0].url : "";
         .project-container img {
             display: block;
             border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 8px var(--box-shadow-color-img);
             transition: transform 0.15s ease-in, border-radius 0.1s ease-in, box-shadow 0.3s linear;
             width: auto;
             filter: grayscale(0) !important;
@@ -202,7 +205,7 @@ const imagelink = links.length > 0 ? links[0].url : "";
 
         .project-container a:hover img {
             transform: scale(1.015);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 4px 8px var(--box-shadow-color-img-hover);
             border-radius: 0.75rem;
         }
     }

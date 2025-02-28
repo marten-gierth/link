@@ -1,8 +1,8 @@
 ---
 import Head from '../components/Head.astro';
 import '../styles/global.css';
-import ChipLink from "../components/ChipLink.astro";
 import Projectwrapper from '../components/projectwrapper.astro';
+import SettingsHomeTheme from '../components/SettingsHomeTheme.astro';
 ---
 <html lang="en">
 <head>
@@ -16,7 +16,7 @@ import Projectwrapper from '../components/projectwrapper.astro';
         <h1>
             Projects
         </h1>
-        <ChipLink chipText="home" url="/" iconLeft="/assets/arrow-left.svg"/>
+        <SettingsHomeTheme/>
     </div>
     <div class="projectwrapper">
         <Projectwrapper/>
@@ -29,15 +29,5 @@ import Projectwrapper from '../components/projectwrapper.astro';
         padding: 0.5rem;
         max-width: 1280px;
         margin: 0 auto;
-    }
-
-    .background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #fcfcfc;
-        z-index: -1;
     }
 </style>

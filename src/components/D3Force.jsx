@@ -7,6 +7,18 @@ export default function D3Force({ graph }) {
     const [centerRepelForce, setCenterRepelForce] = useState(-50);
     const ref = useRef();
 
+    const getNodeFillColor = () => {
+        return getComputedStyle(document.documentElement).getPropertyValue('--d3-force-node-fill-color').trim();
+    };
+
+    const getNodeLinkFillColor = () => {
+        return getComputedStyle(document.documentElement).getPropertyValue('--d3-force-node-link-fill-color').trim();
+    };
+
+    const getNodeStrokeColor = () => {
+        return getComputedStyle(document.documentElement).getPropertyValue('--d3-force-node-stroke-color').trim();
+    };
+
     useEffect(() => {
         const svg = d3.select(ref.current);
         const width = window.innerWidth;
@@ -19,7 +31,7 @@ export default function D3Force({ graph }) {
             .force("link", d3.forceLink(graph.links).id(d => d.id).distance(linkDistance).strength(linkForce))
             .force("charge", d3.forceManyBody().strength(centerRepelForce))
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("radial", d3.forceRadial(height * 0.4, width / 2, height / 2)) // ← 80% diameter
+            .force("radial", d3.forceRadial(height * 0.4, width / 2, height / 2))
             .on("tick", ticked);
 
         const link = svg.selectAll("line")
@@ -38,7 +50,7 @@ export default function D3Force({ graph }) {
             .attr("r", d => d.radius)
             .attr("r", d => d.radius)
             .attr("fill", d => d.link ? "white" : "#3d3d3d")
-            .attr("stroke", d => d.link ? "black" : "none")
+            .attr("stroke", d => d.link ? getNodeStrokeColor() : "none")
             .attr("stroke-width", d => d.link ? 2 : 0)
             .call(drag(simulation));
 
@@ -51,6 +63,7 @@ export default function D3Force({ graph }) {
             .style("font-family", "'Inter', sans-serif")
             .style("font-weight", "400")
             .style("font-size", "1.1rem")
+            .style("fill", getComputedStyle(document.documentElement).getPropertyValue('--d3-force-label-fill-color').trim()) // Dynamically set color
             .style("pointer-events", "none")
             .style("user-select", "none");
 
@@ -80,6 +93,28 @@ export default function D3Force({ graph }) {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, [linkDistance, linkForce, centerRepelForce, graph]);
+
+    // Use MutationObserver to detect Dark Mode change dynamically
+    useEffect(() => {
+        const observer = new MutationObserver(() => {
+            // When the dark mode is toggled, update the node and label colors
+            const nodes = d3.selectAll("circle");
+            const labels = d3.selectAll("text");
+
+            /*nodes.style("fill", getNodeFillColor());*/
+            nodes.style("stroke", getNodeStrokeColor());
+            labels.style("fill", getComputedStyle(document.documentElement).getPropertyValue('--d3-force-label-fill-color').trim());
+        });
+
+        // Observe changes on the <html> element (Dark mode toggle)
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"]
+        });
+
+        // Cleanup the observer when the component is unmounted
+        return () => observer.disconnect();
+    }, []);
 
     const drag = useCallback((simulation) => {
         let dragStarted = false;
