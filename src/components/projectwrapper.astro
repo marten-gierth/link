@@ -52,15 +52,15 @@ const projectCounts = projects.reduce((acc, project) => {
 
             <label for="sortFilter" class="sr-only"> Sort By</label>
             <select id="sortFilter">
-                <option value="default">Sort By</option>
+                <option value="default">Newest First</option>
+<!--                <option value="newest" selected>Newest First</option>-->
+                <option value="oldest">Oldest First</option>
                 <option value="az">Alphabetical (A-Z)</option>
                 <option value="za">Alphabetical (Z-A)</option>
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
-                <option value="category">Category</option>
+<!--                <option value="category">Category</option>-->
             </select>
 
-            <button id="resetFilterButton" style="display: none;">Reset Filter</button>
+            <button id="resetFilterButton" style="display: none;" aria-label="Reset all filters">Reset Filter</button>
         </div>
     </details>
 </div>
