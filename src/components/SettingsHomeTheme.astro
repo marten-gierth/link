@@ -1,0 +1,20 @@
+---
+import ThemeIcon from "./ThemeIcon.astro";
+import ChipLink from "./ChipLink.astro";
+---
+<div class="settingsHomeTheme">
+    <div>
+        <ChipLink chipText="home" url="/" iconLeft="/assets/arrow-left.svg"/>
+    </div>
+    <div>
+        <ThemeIcon/>
+    </div>
+</div>
+
+<style>
+    .settingsHomeTheme {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+</style>

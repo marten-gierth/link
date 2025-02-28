@@ -19,9 +19,48 @@
 }
 
 :root {
-    --color-text: rgba(0, 0, 0, 0.8);
+    background-color: white;
+    --color-text: #3d3d3d;
     --color-icons: #F5DEB3;
     --color-a: #007bff;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+    --box-shadow-color-img: rgba(0, 0, 0, 0.15);
+    --box-shadow-color-img-hover: rgba(0, 0, 0, 0.12);
+
+
+    --d3-force-node-fill-color: #3d3d3d;
+    --d3-force-label-fill-color: black;
+    --d3-force-node-stroke-color: black;
+
+    --project-container-background-color: white;
+    --project-tag: rgba(0, 0, 0, 0.65);
+    --reset-Filter-Button-Text: white;
+
+    transition: background-color 0.3s linear, color 0.3s linear, border-color 0.3s linear , fill 0.3s linear;
+}
+
+html.dark {
+    background-color: black;
+    --color-text: white;
+    --box-shadow-color: rgba(255, 255, 255, 0.1);
+    --box-shadow-color-img: rgba(255, 255, 255, 0.15);
+    --box-shadow-color-img-hover: rgba(255, 255, 255, 0.12);
+
+    --d3-force-node-fill-color: #1e1e1e;
+    --d3-force-label-fill-color: white;
+    --d3-force-node-stroke-color: white;
+
+    --project-container-background-color: #1e1e1e;
+    --project-tag: rgba(255, 255, 255, 0.65);
+    --reset-Filter-Button-Text: black;
+
+    transition: background-color 0.3s linear, color 0.3s linear, border-color 0.3s linear, fill 0.3s linear;
+}
+
+text {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 body, html {

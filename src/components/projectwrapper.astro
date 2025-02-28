@@ -101,7 +101,7 @@ const projectCounts = projects.reduce((acc, project) => {
     }
     #resetFilterButton {
         background-color: var(--color-text);
-        color: white;
+        color: var(--reset-Filter-Button-Text);
         border: 1px solid var(--color-text);
         cursor: pointer;
     }
@@ -113,6 +113,10 @@ const projectCounts = projects.reduce((acc, project) => {
         flex-wrap: wrap-reverse;
         align-items: flex-start;
         gap: 10px;
+    }
+
+    summary, label{
+        color: var(--color-text);
     }
 
     /* Mobile Styles */
