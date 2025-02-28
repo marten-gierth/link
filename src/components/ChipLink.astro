@@ -29,19 +29,19 @@ const {
     <a class="chip-link" href={`${url}`} target={urlNewTab ? "_blank" : ""} rel="noopener noreferrer">
         <div class="chip">
             {chipType && (
-                    <span class="chip-type" style={chipTypeColor ? {backgroundColor: chipTypeColor} : {}}>
+                    <span class="chip-type" style={chipTypeColor ? { backgroundColor: chipTypeColor } : {}}>
                     {chipType}
                 </span>
             )}
             {chipText && (
                     <p class="chiptext">
-                        {iconLeft && <img src={iconLeft} alt="Icon"/>}
+                        {iconLeft && <img src={iconLeft} alt="Icon" width="16" height="16"/>}
                         {chipText}
-                        {iconRight && <img src={iconRight} alt="Icon"/>}
+                        {iconRight && <img src={iconRight} alt="Icon" width="16" height="16"/>}
                     </p>
             )}
         </div>
-        <span class="chip-background" style={backgroundColor ? {backgroundColor: backgroundColor} : {}}></span>
+        <span class="chip-background" style={backgroundColor ? { backgroundColor: backgroundColor } : {}}></span>
     </a>
 </div>
 

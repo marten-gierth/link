@@ -32,6 +32,7 @@ const projectCounts = projects.reduce((acc, project) => {
     <details open id="filterDropdown">
         <summary>Filters</summary>
         <div class="filter-options">
+            <label for="categoryFilter" class="sr-only">Category</label>
             <select id="categoryFilter">
                 <option value="all">All Categories</option>
                 {categories.map((category) => (
@@ -41,6 +42,7 @@ const projectCounts = projects.reduce((acc, project) => {
                 ))}
             </select>
 
+            <label for="yearFilter" class="sr-only">Year</label>
             <select id="yearFilter">
                 <option value="all">All Years</option>
                 {years.map((year) => (
@@ -48,16 +50,17 @@ const projectCounts = projects.reduce((acc, project) => {
                 ))}
             </select>
 
+            <label for="sortFilter" class="sr-only"> Sort By</label>
             <select id="sortFilter">
-                <option value="default">Sort By</option>
+                <option value="default">Newest First</option>
+<!--                <option value="newest" selected>Newest First</option>-->
+                <option value="oldest">Oldest First</option>
                 <option value="az">Alphabetical (A-Z)</option>
                 <option value="za">Alphabetical (Z-A)</option>
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
-                <option value="category">Category</option>
+<!--                <option value="category">Category</option>-->
             </select>
 
-            <button id="resetFilterButton" style="display: none;">Reset Filter</button>
+            <button id="resetFilterButton" style="display: none;" aria-label="Reset all filters">Reset Filter</button>
         </div>
     </details>
 </div>
@@ -148,6 +151,19 @@ const projectCounts = projects.reduce((acc, project) => {
             gap: 10px;
         }
     }
+/*hide filter label for non screenreader*/
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
 </style>
 
 <script>
