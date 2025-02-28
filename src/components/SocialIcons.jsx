@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faGithub, faYoutube, faInstagram, faLinkedin} from '@fortawesome/free-brands-svg-icons';
+import {faGithub, faInstagram, faLinkedin, faYoutube} from '@fortawesome/free-brands-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/global.css';
 
