@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import * as d3 from "d3";
 
-export default function D3Force({ graph }) {
+export default function D3Force({graph}) {
     const [linkDistance, setLinkDistance] = useState(100);
     const [linkForce, setLinkForce] = useState(0.1);
     const [centerRepelForce, setCenterRepelForce] = useState(-50);
@@ -150,7 +150,7 @@ export default function D3Force({ graph }) {
 
     return (
         <div>
-            <svg ref={ref} style={{ width: "100vw", height: "50vh"}}></svg>
+            <svg ref={ref} style={{width: "100vw", height: "50vh"}}></svg>
         </div>
     );
 }
