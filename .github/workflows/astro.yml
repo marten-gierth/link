@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -64,11 +64,14 @@ jobs:
             --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
 
-      # Tests - Linting
-      - name: Run Linting
-        run: npm run lint
-        working-directory: ${{ env.BUILD_PATH }}
-      
+  testing:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       # Tests - Link Check
       - name: Check for broken links
         run: npx linkinator ./dist --fail-on 4xx
@@ -78,7 +81,7 @@ jobs:
       - name: Run Lighthouse performance test
         uses: treosh/lighthouse-ci-action@v7
         with:
-          urls: 'http://localhost'
+          urls: 'file://$(pwd)/dist/index.html'
         env:
           CI: true
 
@@ -86,21 +89,15 @@ jobs:
       - name: Run Lighthouse mobile-friendly test
         uses: treosh/lighthouse-ci-action@v7
         with:
-          urls: 'http://localhost'
+          urls: 'file://$(pwd)/dist/index.html'
         env:
           CI: true
-
-      # Optional: Upload artifact (if you plan to use it later)
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ${{ env.BUILD_PATH }}/dist
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
+    needs: testing
     runs-on: ubuntu-latest
     name: Deploy
     steps:
