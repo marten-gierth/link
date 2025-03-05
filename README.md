@@ -12,4 +12,4 @@ Moin! Welcome to my portfolio. Here you’ll find a collection of my work – fr
 
 Take a look around and check out the projects I’ve worked on. If you're interested in collaboration or have any questions, feel free to reach out!
 
-### Visit the website: [mgieth.de](https://mgieth.de)
+### Visit the website: [mgierth.de](https://mgierth.de)
