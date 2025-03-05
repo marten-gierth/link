@@ -25,4 +25,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# deploy specific	
 .github/dependabot.yml
+README.md
