@@ -1,0 +1,25 @@
+{
+  "visible": true,
+  "title": "Peaceful Rainy Vibes",
+  "date": "2023-12-10",
+  "description": "Rainy Lo-Fi beat to study to - a relaxing, atmospheric track.",
+  "image": "/assets/projects/peaceful-rainy-vibes/image.jpg",
+  "category": [
+    "Music",
+    "Video"
+  ],
+  "projectTags": [
+    "Video",
+    "Music",
+    "Lo-Fi"
+  ],
+  "collaborations": [],
+  "links": [
+    {
+      "chipType": "Youtube",
+      "chipColor": "#FF0000",
+      "chipText": "Watch",
+      "url": "https://youtu.be/RHocdf9KYBI"
+    }
+  ]
+}

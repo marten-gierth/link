@@ -1,0 +1,24 @@
+{
+  "visible": true,
+  "title": "Jurassic Park 1993",
+  "date": "2023-03-03",
+  "description": "For this project, I took on the challenge of creating my own sound design for iconic scenes from the film. All sounds – from the roaring T-Rex to clattering pots – come from the FreeSounds.org library and were carefully timed to recreate the atmosphere of the original.",
+  "image": "/assets/projects/jurassic-park-1993/image.jpg",
+  "category": [
+    "Video"
+  ],
+  "projectTags": [
+    "Video",
+    "Sound Design",
+    "University project"
+  ],
+  "collaborations": [],
+  "links": [
+    {
+      "chipType": "Youtube",
+      "chipColor": "#FF0000",
+      "chipText": "Watch",
+      "url": "https://youtu.be/sRw2pn8igZY"
+    }
+  ]
+}

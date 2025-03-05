@@ -1,0 +1,25 @@
+{
+  "visible": true,
+  "title": "Vacation",
+  "date": "2024-12-03",
+  "description": "A fictional soft drink ad, brought to life through a dynamic vector animation in After Effects with sound design.",
+  "image": "/assets/projects/vacation/image.jpg",
+  "category": [
+    "Video"
+  ],
+  "projectTags": [
+    "Animation",
+    "Vector",
+    "Sound Design",
+    "University Project"
+  ],
+  "collaborations": [],
+  "links": [
+    {
+      "chipType": "Youtube",
+      "chipColor": "#FF0000",
+      "chipText": "Watch",
+      "url": "https://youtu.be/VArubALNi3Q"
+    }
+  ]
+}

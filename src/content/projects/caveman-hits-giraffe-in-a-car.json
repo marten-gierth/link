@@ -1,0 +1,42 @@
+{
+  "visible": true,
+  "title": "Caveman hits Giraffe in a Car",
+  "date": "2025-01-04",
+  "description": "Slash, survive and get tougher - a wacky action roguelike with hand-drawn graphics and a caveman on the hunt for monsters! Just when you think you've seen it all, here it comes: a giraffe in a car.",
+  "image": "/assets/projects/caveman-hits-giraffe-in-a-car/image.jpg",
+  "category": [
+    "Game",
+    "Programming"
+  ],
+  "projectTags": [
+    "Game",
+    "Action Roguelite",
+    "Single-player",
+    "Hand-drawn",
+    "Unity",
+    "University project"
+  ],
+  "collaborations": [
+    {
+      "name": "Karl Kuhne",
+      "link": "https://www.linkedin.com/in/karl-kuhne/"
+    },
+    {
+      "name": "Philip Ahlers",
+      "link": "https://www.linkedin.com/in/philip-ahlers-a915b0341/"
+    }
+  ],
+  "links": [
+    {
+      "chipType": "Website",
+      "chipText": "Play in browser",
+      "url": "https://cavemanhitsgiraffeinacar.github.io"
+    },
+    {
+      "chipType": "Steam",
+      "chipColor": "#00adee",
+      "chipText": "Download",
+      "url": "https://store.steampowered.com/app/3381780/Caveman_hits_Giraffe_in_a_Car/"
+    }
+  ]
+}

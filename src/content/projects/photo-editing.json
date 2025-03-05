@@ -1,0 +1,22 @@
+{
+  "visible": true,
+  "title": "Photo Editing",
+  "date": "2025-01-01",
+  "description": "I enjoy editing photos in Adobe Lightroom. Check out my profile for more!",
+  "category": [
+    "Photography"
+  ],
+  "projectTags": [
+    "Image Editing",
+    "Hobby Project"
+  ],
+  "collaborations": [],
+  "links": [
+    {
+      "chipType": "Lightroom",
+      "chipColor": "#001e37",
+      "chipText": "Profile",
+      "url": "https://lightroom.adobe.com/u/martengierth/"
+    }
+  ]
+}
