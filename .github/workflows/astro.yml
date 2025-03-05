@@ -64,35 +64,37 @@ jobs:
             --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
 
-  testing:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+testing:
+  name: Run Tests
+  runs-on: ubuntu-latest
+  needs: build
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      # Tests - Link Check
-      - name: Check for broken links
-        run: npx linkinator ./dist --fail-on 4xx
-        working-directory: ${{ env.BUILD_PATH }}
+    # Ensure the dist directory exists
+    - name: Check if dist directory exists
+      run: |
+        if [ ! -d "./dist" ]; then
+          echo "Build directory does not exist. Exiting...";
+          exit 1;
+        fi
+
+    # Tests - Link Check
+    - name: Check for broken links
+      run: |
+        echo "Checking links in the dist folder..."
+        npx linkinator ./dist --fail-on 4xx
+      working-directory: ${{ env.BUILD_PATH }}
       
-      # Performance Tests
-      - name: Run Lighthouse performance test
-        uses: treosh/lighthouse-ci-action@v7
-        with:
-          urls: 'file://$(pwd)/dist/index.html'
-        env:
-          CI: true
-
-      # Mobile-Friendly Test
-      - name: Run Lighthouse mobile-friendly test
-        uses: treosh/lighthouse-ci-action@v7
-        with:
-          urls: 'file://$(pwd)/dist/index.html'
-        env:
-          CI: true
-
+    # Performance Tests
+    - name: Run Lighthouse performance test
+      uses: treosh/lighthouse-ci-action@v7
+      with:
+        urls: 'file://$(pwd)/dist/index.html'
+      env:
+        CI: true
+        
   deploy:
     environment:
       name: github-pages
