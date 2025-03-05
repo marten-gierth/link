@@ -1,0 +1,29 @@
+{
+  "visible": true,
+  "title": "Dresden is UNreal",
+  "date": "2024-11-03",
+  "description": "A fast-paced journey through Dresden - match cuts, hyperlapses, and vibrant street art blend into a seamless visual flow.",
+  "image": "/assets/projects/dresden-is-u-nreal/image.jpg",
+  "category": [
+    "Video"
+  ],
+  "projectTags": [
+    "Video",
+    "Hyperlapse",
+    "University project"
+  ],
+  "collaborations": [
+    {
+      "name": "Ragnar Schott",
+      "link": "https://de.linkedin.com/in/ragnar-schott-597332300"
+    }
+  ],
+  "links": [
+    {
+      "chipType": "Youtube",
+      "chipColor": "#FF0000",
+      "chipText": "Watch",
+      "url": "https://youtu.be/fnPlhtcw6DQ"
+    }
+  ]
+}

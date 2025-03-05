@@ -1,0 +1,34 @@
+{
+  "visible": true,
+  "title": "Pearl Western Style",
+  "date": "2023-10-18",
+  "category": [
+    "Video"
+  ],
+  "projectTags": [
+    "Video",
+    "Sound Design",
+    "Challenge",
+    "University project"
+  ],
+  "description": "A cinematic fragrance ad, created in a three-day challenge for the fictional project Pearl. Filmed in a retired bank vault.",
+  "image": "/assets/projects/pearl-western-style/image.jpg",
+  "collaborations": [
+    {
+      "name": "Ragnar Schott",
+      "link": "https://de.linkedin.com/in/ragnar-schott-597332300"
+    },
+    {
+      "name": "Karl Kuhne",
+      "link": "https://www.linkedin.com/in/karl-kuhne/"
+    }
+  ],
+  "links": [
+    {
+      "chipType": "Youtube",
+      "chipColor": "#FF0000",
+      "chipText": "Watch",
+      "url": "https://youtu.be/NOOiQu3aN4Y"
+    }
+  ]
+}

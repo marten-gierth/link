@@ -1,8 +1,12 @@
 ---
 import Project from "../components/project.astro";
-import projects from "../data/projects.json";
+const projects = await Astro.glob('/src/content/projects/*.json');
 
-// Count the number of projects for each category
+function convertDate(dateString) {
+    const parts = dateString.split('.');
+    return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+}
+
 const categoryCounts = projects.reduce((acc, project) => {
     (project.category || []).forEach((category) => {
         acc[category] = (acc[category] || 0) + 1;
@@ -10,15 +14,12 @@ const categoryCounts = projects.reduce((acc, project) => {
     return acc;
 }, {});
 
-// Create an array of categories and sort by project count
 const categories = Object.keys(categoryCounts).sort((a, b) => categoryCounts[b] - categoryCounts[a]);
 
-// Extract years
-const years = Array.from(new Set(projects.map((p) => new Date(p.date).getFullYear()))).sort().reverse();
+const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFullYear()))).sort().reverse();
 
-// Count the number of projects for each category and year combination
 const projectCounts = projects.reduce((acc, project) => {
-    const year = new Date(project.date).getFullYear();
+    const year = convertDate(project.date).getFullYear();
     (project.category || []).forEach((category) => {
         if (!acc[category]) acc[category] = {};
         if (!acc[category][year]) acc[category][year] = 0;
@@ -28,7 +29,7 @@ const projectCounts = projects.reduce((acc, project) => {
 }, {});
 ---
 <div class="filter-wrapper">
-    <!-- Mobile Dropdown for Filters -->
+    <!-- Dropdown for Filters -->
     <details open id="filterDropdown">
         <summary>Filters</summary>
         <div class="filter-options">
@@ -50,14 +51,12 @@ const projectCounts = projects.reduce((acc, project) => {
                 ))}
             </select>
 
-            <label for="sortFilter" class="sr-only"> Sort By</label>
+            <label for="sortFilter" class="sr-only">Sort By</label>
             <select id="sortFilter">
-                <option value="default">Newest First</option>
-                <!--                <option value="newest" selected>Newest First</option>-->
+                <option value="newest">Newest First</option>
                 <option value="oldest">Oldest First</option>
                 <option value="az">Alphabetical (A-Z)</option>
                 <option value="za">Alphabetical (Z-A)</option>
-                <!--                <option value="category">Category</option>-->
             </select>
 
             <button id="resetFilterButton" style="display: none;" aria-label="Reset all filters">Reset Filter</button>
@@ -72,7 +71,8 @@ const projectCounts = projects.reduce((acc, project) => {
 
 <div id="project-list">
     {projects.map((project) => (
-            <div class="project-item" data-categories={project.category.join(',')}
+            <div class="project-item"
+                 data-categories={Array.isArray(project.category) ? project.category.join(',') : 'other'}
                  data-year={new Date(project.date).getFullYear()}>
                 <Project
                         visible={project.visible}
@@ -184,7 +184,7 @@ const projectCounts = projects.reduce((acc, project) => {
         const urlParams = new URLSearchParams(window.location.search);
         const selectedCategory = urlParams.get('category') || 'all';
         const selectedYear = urlParams.get('year') || 'all';
-        const selectedSort = urlParams.get('sort') || 'default';
+        const selectedSort = urlParams.get('sort') || 'newest';
 
         const categoryFilter = document.getElementById("categoryFilter");
         const yearFilter = document.getElementById("yearFilter");
@@ -223,11 +223,11 @@ const projectCounts = projects.reduce((acc, project) => {
                 const dateA = new Date(a.dataset.year).getTime();
                 const dateB = new Date(b.dataset.year).getTime();
 
-                if (sort === "az") return titleA.localeCompare(titleB);
-                if (sort === "za") return titleB.localeCompare(titleA);
-                if (sort === "newest") return dateB - dateA;
-                if (sort === "oldest") return dateA - dateB;
-                if (sort === "category") return a.dataset.categories.split(',')[0].localeCompare(b.dataset.categories.split(',')[0]);
+                // Sorting logic based on the selected sort option
+                if (sort === "az") return titleA.localeCompare(titleB);  // Alphabetical A-Z
+                if (sort === "za") return titleB.localeCompare(titleA);  // Alphabetical Z-A
+                if (sort === "newest") return dateB - dateA;  // Sort by newest first (most recent date first)
+                if (sort === "oldest") return dateA - dateB;  // Sort by oldest first (earliest date first)
             });
 
             // Apply sorted elements back into DOM
@@ -250,13 +250,13 @@ const projectCounts = projects.reduce((acc, project) => {
             if (newYear === 'all') newUrl.searchParams.delete("year");
             else newUrl.searchParams.set("year", newYear);
 
-            if (newSort === 'default') newUrl.searchParams.delete("sort");
+            if (newSort === 'newest') newUrl.searchParams.delete("sort");
             else newUrl.searchParams.set("sort", newSort);
 
             window.location.href = newUrl.toString();
             filterProjects(newCategory, newYear, newSort);
 
-            resetFilterButton.style.display = (newCategory !== "all" || newYear !== "all" || newSort !== "default") ? "inline-block" : "none";
+            resetFilterButton.style.display = (newCategory !== "all" || newYear !== "all" || newSort !== "newest") ? "inline-block" : "none";
         }
 
         filterProjects(selectedCategory, selectedYear, selectedSort);
@@ -268,7 +268,7 @@ const projectCounts = projects.reduce((acc, project) => {
         resetFilterButton.addEventListener("click", function () {
             categoryFilter.value = "all";
             yearFilter.value = "all";
-            sortFilter.value = "default";
+            sortFilter.value = "newest";
 
             const newUrl = new URL(window.location);
             newUrl.searchParams.delete("category");
@@ -276,7 +276,7 @@ const projectCounts = projects.reduce((acc, project) => {
             newUrl.searchParams.delete("sort");
             window.location.href = newUrl.toString();
 
-            filterProjects("all", "all", "default");
+            filterProjects("all", "all", "newest");
             resetFilterButton.style.display = "none";
 
             categoryFilter.dispatchEvent(new Event("change"));
@@ -284,7 +284,7 @@ const projectCounts = projects.reduce((acc, project) => {
             sortFilter.dispatchEvent(new Event("change"));
         });
 
-        if (selectedCategory !== 'all' || selectedYear !== 'all' || selectedSort !== 'default') {
+        if (selectedCategory !== 'all' || selectedYear !== 'all' || selectedSort !== 'newest') {
             resetFilterButton.style.display = 'inline-block';
         }
     });

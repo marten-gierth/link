@@ -3,7 +3,10 @@ import react from '@astrojs/react';
 
 import sitemap from '@astrojs/sitemap';
 
+import markdoc from '@astrojs/markdoc';
+import keystatic from '@keystatic/astro';
+
 export default defineConfig({
     site: "https://martengierth.de/",
-    integrations: [react(), sitemap()],
+    integrations: [react(), sitemap(), markdoc(), keystatic()],
 });
