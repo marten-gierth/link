@@ -1,6 +1,9 @@
 ---
 import Project from "../components/project.astro";
-const projects = await Astro.glob('/src/content/projects/*.json');
+const projectFiles = import.meta.glob('/src/content/projects/*.json');
+const projects = await Promise.all(
+    Object.values(projectFiles).map((file) => file().then((module) => module.default))
+);
 
 function convertDate(dateString) {
     const parts = dateString.split('.');
