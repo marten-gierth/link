@@ -68,6 +68,12 @@ jobs:
             --site "${{ steps.pages.outputs.origin }}" \
             --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
+      - name: Log build output
+        run: |
+          echo "Checking build directory..."
+          ls -la ${{ env.BUILD_PATH }}
+          echo "Checking dist directory..."
+          ls -la ${{ env.BUILD_PATH }}/dist || echo "dist directory does not exist!"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
