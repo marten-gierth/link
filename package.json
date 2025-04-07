@@ -19,7 +19,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@keystatic/astro": "^5.0.6",
     "@keystatic/core": "^0.5.46",
-    "@types/react": "^19.0.10",
+    "@types/react": "^19.1.0",
     "@types/react-dom": "^19.0.4",
     "astro": "^5.4.2",
     "d3": "^7.9.0",
