@@ -2,13 +2,9 @@
 import Head from '../components/Head.astro';
 import '../styles/global.css';
 import SettingsHomeTheme from '../components/SettingsHomeTheme.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<html lang="en">
-<head>
-    <Head title="Marten Gierth | Legal Notice" url="https://mgierth.de/legal"/>
-</head>
-<body>
-<main>
+<BaseLayout title="Marten Gierth | Legal Notice" url="https://mgierth.de/legal">
     <div class="contentwrapper">
         <h1>
             Legal Notice
@@ -36,5 +32,4 @@ import SettingsHomeTheme from '../components/SettingsHomeTheme.astro';
             </a>
         </p>
     </div>
-</main>
-</body>
+</BaseLayout>
