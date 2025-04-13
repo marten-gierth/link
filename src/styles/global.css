@@ -21,8 +21,9 @@
 :root {
     background-color: white;
     --color-text: #3d3d3d;
-    --color-icons: #F5DEB3;
     --color-a: #007bff;
+    --color-icons: #3d3d3d;
+
     --box-shadow-color: rgba(0, 0, 0, 0.1);
     --box-shadow-color-img: rgba(0, 0, 0, 0.15);
     --box-shadow-color-img-hover: rgba(0, 0, 0, 0.12);
@@ -36,7 +37,18 @@
     --project-tag: rgba(0, 0, 0, 0.65);
     --reset-Filter-Button-Text: white;
 
-    transition: background-color 0.3s linear, color 0.3s linear, border-color 0.3s linear , fill 0.3s linear;
+    transition: background-color 0.3s linear, color 0.3s linear, border-color 0.3s linear, fill 0.3s linear;
+}
+
+html, body {
+    scroll-behavior: smooth;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
 }
 
 html.dark {
@@ -63,20 +75,16 @@ text {
     text-rendering: optimizeLegibility;
 }
 
-body, html {
-    margin: 0;
-    padding: 0;
+main{
+    flex: 1;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 0.3rem;
-    margin-bottom: 1rem;
-    color: white;
-}
+footer{
+    margin-top: 10rem;
+    padding-bottom: 1rem;
+     background: #2A7B9B;
+     background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 37%, rgba(237, 221, 83, 1) 100%);
+ }
 
 .contentwrapper {
     padding: 2rem;
@@ -93,7 +101,7 @@ footer {
 
 h1 {
     color: var(--color-text);
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     margin-bottom: 1rem;

@@ -150,7 +150,7 @@ export default function D3Force({graph}) {
 
     return (
         <div>
-            <svg ref={ref} style={{width: "100vw", height: "50vh"}}></svg>
+            <svg ref={ref} style={{width: "95vw", height: "50vh"}}></svg>
         </div>
     );
 }
