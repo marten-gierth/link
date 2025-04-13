@@ -1,6 +1,35 @@
 ---
 import ChipLink from "./ChipLink.astro";
+import SvgWaves from "./SvgWaves.astro";
+const year = new Date().getFullYear()
+import SocialIcons from "./SocialIcons";
 ---
-<footer>
-    <ChipLink chipText="Legal Notice" url="/legal" iconRight="/assets/arrow-right.svg"/>
-</footer>
+
+<div class="footer">
+    <div class="footer-svg">
+        <SvgWaves/>
+    </div>
+    <div class="footer-social-icons">
+    <SocialIcons/>
+    </div>
+    <div>
+        <ChipLink chipText="Legal Notice" url="/legal" iconRight="/assets/arrow-right.svg"/>
+    </div>
+    <p>&copy; {year} Marten Gierth. All rights reserved.</p>
+</div>
+<style>
+    .footer {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-svg {
+        transform: translateY(-60%);
+    }
+
+    .footer-social-icons {
+        margin-bottom: 1rem;
+        margin-top: -3vw;
+    }
+</style>

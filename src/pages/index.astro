@@ -5,6 +5,8 @@ import D3Force from "../components/D3Force.jsx";
 import graph from "../data/nodes.json";
 import ThemeIcon from '../components/ThemeIcon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Projectwrapper from "../components/projectwrapper.astro";
+import SvgShipWaves from '../components/SvgShipWaves.astro';
 ---
 <BaseLayout title="Marten Gierth | Portfolio">
     <div class="censored-container">
@@ -12,16 +14,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h1>Moin, i am Marten</h1>
         <div class="linkContainer">
             <div>
-                <ChipLink chipType="new" chipTypeColor="Red" chipText="Projects" url="/projects"
+                <ChipLink chipType="new" chipTypeColor="Red" chipText="Projects" url="#projects"
                           iconRight="/assets/arrow-right.svg"/>
-            </div>
-            <div>
-                <ChipLink chipText="Legal Notice" url="/legal" iconRight="/assets/arrow-right.svg"/>
             </div>
             <div>
                 <ThemeIcon/>
             </div>
         </div>
+        <SvgShipWaves/>
+    </div>
+
+    <div class="contentwrapper">
+        <h1 id="projects">
+            Projects
+        </h1>
+    </div>
+    <div class="projectwrapper">
+        <Projectwrapper/>
     </div>
 </BaseLayout>
 
@@ -30,7 +39,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         text-align: center;
         align-items: center;
         justify-content: center;
-        font-size: 3.5rem;
         margin-bottom: 1rem;
     }
 
@@ -40,7 +48,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         align-items: center;
         justify-content: center;
         margin-top: 2rem;
-        padding-top: min(50vh, calc(10vh));
+        height: 100vh;
     }
 
     .linkContainer {
@@ -54,5 +62,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .linkContainer div {
         margin-top: 1rem;
+    }
+
+    .projectwrapper {
+        padding: 0.5rem;
+        max-width: 1280px;
+        margin: 0 auto;
     }
 </style>

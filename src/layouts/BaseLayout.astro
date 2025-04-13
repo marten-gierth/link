@@ -1,15 +1,20 @@
 ---
 // src/layouts/BaseLayout.astro
 import Head from "../components/Head.astro";
-const { title, description, url, image } = Astro.props;
+const {title, description, url, image} = Astro.props;
+import Footer from "../components/Footer.astro";
 ---
 <html lang="de">
 <head>
-    <Head title={title} description={description} url={url} image={image} />
+    <Head title={title} description={description} url={url} image={image}/>
 </head>
 <body>
 <main>
     <slot/>
 </main>
+
+<footer>
+    <Footer/>
+</footer>
 </body>
 </html>
