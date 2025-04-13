@@ -1,14 +1,9 @@
 ---
 import '../styles/global.css';
-import Head from "../components/Head.astro";
 import SettingsHomeTheme from '../components/SettingsHomeTheme.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<html lang="en">
-<head>
-    <Head title="Marten Gierth | Portfolio"/>
-</head>
-<body>
-<main>
+<BaseLayout title="404 Not Found :(">
     <div class="censored-container">
         <h1>Oops! Page not found.</h1>
 
@@ -20,9 +15,7 @@ import SettingsHomeTheme from '../components/SettingsHomeTheme.astro';
     <div class="linkContainer">
         <SettingsHomeTheme/>
     </div>
-</main>
-</body>
-</html>
+</BaseLayout>
 
 <style>
     .h1 {

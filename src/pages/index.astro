@@ -1,17 +1,12 @@
 ---
 import '../styles/global.css';
-import Head from "../components/Head.astro";
 import ChipLink from '../components/ChipLink.astro';
 import D3Force from "../components/D3Force.jsx";
 import graph from "../data/nodes.json";
 import ThemeIcon from '../components/ThemeIcon.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<html lang="en">
-<head>
-    <Head title="Marten Gierth | Portfolio"/>
-</head>
-<body>
-<main>
+<BaseLayout title="Marten Gierth | Portfolio">
     <div class="censored-container">
         <D3Force client:only="react" graph={graph}/>
         <h1>Moin, i am Marten</h1>
@@ -28,9 +23,7 @@ import ThemeIcon from '../components/ThemeIcon.astro';
             </div>
         </div>
     </div>
-</main>
-</body>
-</html>
+</BaseLayout>
 
 <style>
     .h1 {
