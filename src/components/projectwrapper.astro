@@ -1,25 +1,31 @@
 ---
 import Project from "../components/project.astro";
 import ChipLink from "./ChipLink.astro";
+
+// Import project files
 const projectFiles = import.meta.glob('/src/content/projects/*.json');
-const projects = await Promise.all(
+const projects: Array<{ [key: string]: any }> = await Promise.all(
     Object.values(projectFiles).map((file) => file().then((module) => module.default))
 );
 
-function convertDate(dateString) {
+// Helper function to convert date strings to Date objects
+function convertDate(dateString: string): Date {
     const parts = dateString.split('.');
     return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
 }
 
-const categoryCounts = projects.reduce((acc, project) => {
-    (project.category || []).forEach((category) => {
+// Calculate category counts
+const categoryCounts: Record<string, number> = projects.reduce((acc: Record<string, number>, project) => {
+    (project.category || []).forEach((category: string) => {
         acc[category] = (acc[category] || 0) + 1;
     });
     return acc;
 }, {});
 
+// Extract and sort categories
 const categories = Object.keys(categoryCounts).sort((a, b) => categoryCounts[b] - categoryCounts[a]);
 
+// Extract and sort years
 const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFullYear()))).sort().reverse();
 ---
 <div class="filter-wrapper" id="filterWrapper" style="display: none">
@@ -82,22 +88,22 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             </div>
     ))}
 </div>
+
 <div class="loadButtonWrapper">
     <div class="loadFilterButtonWrapper">
         <ChipLink
-                chipType=""
+                chipType="Click here"
                 chipTypeColor="#E60000"
-                chipText="load more"
+                chipText="to load more projects"
                 url="?sort=newest#projects"
         />
     </div>
-
 
     <div class="loadMoreButtonWrapper">
         <ChipLink
                 chipType=""
                 chipTypeColor="#E60000"
-                chipText="load more"
+                chipText="Load More"
                 url=""
         />
     </div>
@@ -205,7 +211,6 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
         align-items: center;
         margin-top: 1rem;
     }
-
 </style>
 
 <script>
@@ -215,6 +220,7 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
         let scrollPosition = sessionStorage.getItem('scrollPosition')
 
         const urlParams = new URLSearchParams(window.location.search);
+
         const selectedCategory = urlParams.get('category') || 'all';
         const selectedYear = urlParams.get('year') || 'all';
         const selectedSort = urlParams.get('sort') || 'Spotlight';
@@ -314,7 +320,6 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             else newUrl.searchParams.set("sort", newSort);
 
             newUrl.hash = 'projects';
-
             window.location.href = newUrl.toString();
             filterProjects(newCategory, newYear, newSort);
 
