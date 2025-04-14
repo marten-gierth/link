@@ -20,7 +20,7 @@ export default config({
             path: 'src/content/projects/*',
             slugField: 'title',
             format: {data: 'json'},
-            columns: ['title', 'date', 'category', 'visible'],
+            columns: ['title', 'date', 'category', 'visible', 'spotlight'],
             schema: {
                 visible: fields.checkbox({
                     label: 'Visible',
