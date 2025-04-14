@@ -6,6 +6,9 @@ import SocialIcons from "./SocialIcons";
 ---
 
 <div class="footer">
+    <div class="footer-background-color">
+
+    </div>
     <div class="footer-svg">
         <SvgWaves/>
     </div>
@@ -25,11 +28,33 @@ import SocialIcons from "./SocialIcons";
     }
 
     .footer-svg {
-        transform: translateY(-60%);
+        transform: translateY(-30%);
     }
 
     .footer-social-icons {
         margin-bottom: 1rem;
         margin-top: -3vw;
+        padding-top: 3rem;
     }
+
+    .footer-background-color{
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+
+        # Waves
+        background: #2A7B9B;
+        background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 37%, rgba(237, 221, 83, 1) 100%);
+        --mask:
+                radial-gradient(4.47vw at 50% 6vw,#000 99%,#0000 101%) calc(50% - 4vw) 0/8vw 100%,
+                radial-gradient(4.47vw at 50% -4vw,#0000 99%,#000 101%) 50% 2vw/8vw 100% repeat-x;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+    }
+
+
 </style>
