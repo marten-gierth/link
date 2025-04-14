@@ -41,7 +41,7 @@
 }
 
 html, body {
-    scroll-behavior: smooth;
+/*    scroll-behavior: smooth;*/
     height: 100%;
 
     margin: 0;

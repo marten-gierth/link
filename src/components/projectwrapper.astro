@@ -82,24 +82,25 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             </div>
     ))}
 </div>
+<div class="loadButtonWrapper">
+    <div class="loadFilterButtonWrapper">
+        <ChipLink
+                chipType=""
+                chipTypeColor="#E60000"
+                chipText="load more"
+                url="?sort=newest#projects"
+        />
+    </div>
 
-<div class="loadFilterButtonWrapper">
-    <ChipLink
-            chipType="Filter"
-            chipTypeColor="#E60000"
-            chipText="load more"
-            url="?sort=newest#projects"
-    />
-</div>
 
-
-<div class="loadMoreButtonWrapper">
-    <ChipLink
-            chipType=""
-            chipTypeColor="#E60000"
-            chipText="load more"
-            url="?sort=newest#projects"
-    />
+    <div class="loadMoreButtonWrapper">
+        <ChipLink
+                chipType=""
+                chipTypeColor="#E60000"
+                chipText="load more"
+                url=""
+        />
+    </div>
 </div>
 
 <style>
@@ -192,7 +193,13 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
     }
 
     .loadMoreButtonWrapper, .loadFilterButtonWrapper {
-        visibility: hidden;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    .loadButtonWrapper{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -203,6 +210,10 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        let amount = new URLSearchParams(window.location.search).get('amount') || 5;
+        amount = parseInt(amount, 10);
+        let scrollPosition = sessionStorage.getItem('scrollPosition')
+
         const urlParams = new URLSearchParams(window.location.search);
         const selectedCategory = urlParams.get('category') || 'all';
         const selectedYear = urlParams.get('year') || 'all';
@@ -270,13 +281,12 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             const loadFilterButtonWrapper = document.querySelector(".loadFilterButtonWrapper");
 
             if (Array.from(new URLSearchParams(window.location.search).entries()).length === 0) {
-                loadFilterButtonWrapper.style.visibility = "visible";
+                loadFilterButtonWrapper.style.display = "block";
             }
 
-
-            if (projectsArray.length > 5) {
-                projectsArray.slice(0, 5).forEach(item => container.appendChild(item));
-                loadMoreButtonWrapper.style.visibility = "visible";
+            if (projectsArray.length > amount) {
+                projectsArray.slice(0, amount).forEach(item => container.appendChild(item));
+                loadMoreButtonWrapper.style.display = "block";
             } else {
                 projectsArray.forEach(item => container.appendChild(item));
             }
@@ -288,7 +298,9 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             const newCategory = categoryFilter.value;
             const newYear = yearFilter.value;
             const newSort = sortFilter.value;
+            const newAmount = 5;
             const newUrl = new URL(window.location);
+            newUrl.searchParams.set("amount", newAmount);
 
             if (newCategory === 'all') newUrl.searchParams.delete("category");
             else newUrl.searchParams.set("category", newCategory);
@@ -326,6 +338,7 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             newUrl.searchParams.delete("category");
             newUrl.searchParams.delete("year");
             newUrl.searchParams.delete("sort");
+            newUrl.searchParams.delete("amount");
             window.location.href = newUrl.toString();
 
             filterProjects("all", "all", "newest");
@@ -334,6 +347,33 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             categoryFilter.dispatchEvent(new Event("change"));
             yearFilter.dispatchEvent(new Event("change"));
             sortFilter.dispatchEvent(new Event("change"));
+        });
+
+        document.querySelector(".loadMoreButtonWrapper a")?.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+
+            amount += 5;
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set("amount", amount);
+            window.location.href = newUrl.toString();
+        });
+
+        window.addEventListener('load', function () {
+            const anchor = window.location.hash;
+
+            if (scrollPosition > 0) {
+                // Wenn scrollPosition größer als 0 ist, immer zu dieser Position scrollen
+                window.scrollTo(0, scrollPosition);
+            } else if (anchor) {
+                // Andernfalls, wenn ein Anker vorhanden ist, zum Anker scrollen
+                const element = document.querySelector(anchor);
+                if (element) {
+                    element.scrollIntoView({behavior: 'smooth'});
+                }
+            }
+            sessionStorage.removeItem('scrollPosition');
         });
 
         if (
