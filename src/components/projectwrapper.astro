@@ -304,7 +304,11 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             window.location.href = newUrl.toString();
             filterProjects(newCategory, newYear, newSort);
 
-            resetFilterButton.style.display = (newCategory !== "all" || newYear !== "all" || newSort !== "Spotlight") ? "inline-block" : "none";
+            const shouldShowReset =
+                newCategory !== "all" ||
+                newYear !== "all" ||
+                (newSort !== "Spotlight" && newSort !== "newest");
+            resetFilterButton.style.display = shouldShowReset ? "inline-block" : "none";
         }
 
         filterProjects(selectedCategory, selectedYear, selectedSort);
@@ -316,7 +320,7 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
         resetFilterButton.addEventListener("click", function () {
             categoryFilter.value = "all";
             yearFilter.value = "all";
-            sortFilter.value = "Spotlight";
+            sortFilter.value = "newest";
 
             const newUrl = new URL(window.location);
             newUrl.searchParams.delete("category");
@@ -324,7 +328,7 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             newUrl.searchParams.delete("sort");
             window.location.href = newUrl.toString();
 
-            filterProjects("all", "all", "Spotlight");
+            filterProjects("all", "all", "newest");
             resetFilterButton.style.display = "none";
 
             categoryFilter.dispatchEvent(new Event("change"));
@@ -332,7 +336,11 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             sortFilter.dispatchEvent(new Event("change"));
         });
 
-        if (selectedCategory !== 'all' || selectedYear !== 'all' || selectedSort !== 'Spotlight') {
+        if (
+            selectedCategory !== 'all' ||
+            selectedYear !== 'all' ||
+            (selectedSort !== 'Spotlight' && selectedSort !== 'newest')
+        ) {
             resetFilterButton.style.display = 'inline-block';
         }
     });
