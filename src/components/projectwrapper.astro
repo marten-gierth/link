@@ -1,38 +1,34 @@
 ---
 import Project from "../components/project.astro";
 import ChipLink from "./ChipLink.astro";
+
+// Import project files
 const projectFiles = import.meta.glob('/src/content/projects/*.json');
-const projects = await Promise.all(
+const projects: Array<{ [key: string]: any }> = await Promise.all(
     Object.values(projectFiles).map((file) => file().then((module) => module.default))
 );
 
-function convertDate(dateString) {
+// Helper function to convert date strings to Date objects
+function convertDate(dateString: string): Date {
     const parts = dateString.split('.');
     return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
 }
 
-const categoryCounts = projects.reduce((acc, project) => {
-    (project.category || []).forEach((category) => {
+// Calculate category counts
+const categoryCounts: Record<string, number> = projects.reduce((acc: Record<string, number>, project) => {
+    (project.category || []).forEach((category: string) => {
         acc[category] = (acc[category] || 0) + 1;
     });
     return acc;
 }, {});
 
+// Extract and sort categories
 const categories = Object.keys(categoryCounts).sort((a, b) => categoryCounts[b] - categoryCounts[a]);
 
+// Extract and sort years
 const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFullYear()))).sort().reverse();
-
-const projectCounts = projects.reduce((acc, project) => {
-    const year = convertDate(project.date).getFullYear();
-    (project.category || []).forEach((category) => {
-        if (!acc[category]) acc[category] = {};
-        if (!acc[category][year]) acc[category][year] = 0;
-        acc[category][year]++;
-    });
-    return acc;
-}, {});
 ---
-<div class="filter-wrapper">
+<div class="filter-wrapper" id="filterWrapper" style="display: none">
     <!-- Dropdown for Filters -->
     <details open id="filterDropdown">
         <summary>Filters</summary>
@@ -57,6 +53,7 @@ const projectCounts = projects.reduce((acc, project) => {
 
             <label for="sortFilter" class="sr-only">Sort By</label>
             <select id="sortFilter">
+                <option value="Spotlight" selected hidden>Spotlight</option>
                 <option value="newest">Newest First</option>
                 <option value="oldest">Oldest First</option>
                 <option value="az">Alphabetical (A-Z)</option>
@@ -77,7 +74,8 @@ const projectCounts = projects.reduce((acc, project) => {
     {projects.map((project) => (
             <div class="project-item"
                  data-categories={Array.isArray(project.category) ? project.category.join(',') : 'other'}
-                 data-year={new Date(project.date).getFullYear()}>
+                 data-year={new Date(project.date).getFullYear()}
+                 data-spotlight={project.spotlight ? "true" : "false"}>
                 <Project
                         visible={project.visible}
                         title={project.title}
@@ -91,13 +89,24 @@ const projectCounts = projects.reduce((acc, project) => {
     ))}
 </div>
 
-<div class="loadMoreButtonWrapper">
-    <ChipLink
-            chipType="load more"
-            chipTypeColor="#E60000"
-            chipText="Projects"
-            url="?sort=newest#projects"
-    />
+<div class="loadButtonWrapper">
+    <div class="loadFilterButtonWrapper">
+        <ChipLink
+                chipType="Click here"
+                chipTypeColor="#E60000"
+                chipText="to load more projects"
+                url="?sort=newest#projects"
+        />
+    </div>
+
+    <div class="loadMoreButtonWrapper">
+        <ChipLink
+                chipType=""
+                chipTypeColor="#E60000"
+                chipText="Load More"
+                url=""
+        />
+    </div>
 </div>
 
 <style>
@@ -189,26 +198,38 @@ const projectCounts = projects.reduce((acc, project) => {
         white-space: nowrap;
     }
 
-    .loadMoreButtonWrapper {
-        visibility: hidden;
-        display: flex;
+    .loadMoreButtonWrapper, .loadFilterButtonWrapper {
+        display: none;
         justify-content: center;
         align-items: center;
         margin-top: 1rem;
     }
 
+    .loadButtonWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+    }
 </style>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        let amount = new URLSearchParams(window.location.search).get('amount') || 5;
+        amount = parseInt(amount, 10);
+        let scrollPosition = sessionStorage.getItem('scrollPosition')
+
         const urlParams = new URLSearchParams(window.location.search);
+
         const selectedCategory = urlParams.get('category') || 'all';
         const selectedYear = urlParams.get('year') || 'all';
-        const selectedSort = urlParams.get('sort') || 'newest';
+        const selectedSort = urlParams.get('sort') || 'Spotlight';
+        const showSpotlight = selectedSort === 'Spotlight';
 
         const categoryFilter = document.getElementById("categoryFilter");
         const yearFilter = document.getElementById("yearFilter");
         const sortFilter = document.getElementById("sortFilter");
+        const filterWrapper = document.getElementById("filterWrapper");
         const resetFilterButton = document.getElementById("resetFilterButton");
         const noProjectsMessage = document.getElementById("noProjectsMessage");
 
@@ -216,18 +237,27 @@ const projectCounts = projects.reduce((acc, project) => {
         yearFilter.value = selectedYear;
         sortFilter.value = selectedSort;
 
+        if (selectedSort === 'Spotlight') {
+            filterWrapper.style.display = "none";
+        } else {
+            filterWrapper.style.display = "block";
+        }
+
         function filterProjects(category, year, sort) {
             let projectsArray = Array.from(document.querySelectorAll(".project-item"));
             let visibleProjects = 0;
 
+            // Filter projects based on selected filters
             projectsArray.forEach((item) => {
                 const projectCategories = item.dataset.categories.split(',');
                 const projectYear = item.dataset.year;
+                const isSpotlight = item.dataset.spotlight === "true";  // Check if the project is a spotlight project
 
                 const matchesCategory = (category === "all" || projectCategories.includes(category));
                 const matchesYear = (year === "all" || projectYear == year);
+                const matchesSpotlight = (showSpotlight ? isSpotlight : true);  // If Spotlight is selected, only spotlight projects should be shown
 
-                if (matchesCategory && matchesYear) {
+                if (matchesCategory && matchesYear && matchesSpotlight) {
                     item.style.display = "block";
                     visibleProjects++;
                 } else {
@@ -254,10 +284,15 @@ const projectCounts = projects.reduce((acc, project) => {
             const container = document.getElementById("project-list");
             container.innerHTML = "";
             const loadMoreButtonWrapper = document.querySelector(".loadMoreButtonWrapper");
+            const loadFilterButtonWrapper = document.querySelector(".loadFilterButtonWrapper");
 
             if (Array.from(new URLSearchParams(window.location.search).entries()).length === 0) {
-                projectsArray.slice(0, 3).forEach(item => container.appendChild(item));
-                loadMoreButtonWrapper.style.visibility = "visible";
+                loadFilterButtonWrapper.style.display = "block";
+            }
+
+            if (projectsArray.length > amount) {
+                projectsArray.slice(0, amount).forEach(item => container.appendChild(item));
+                loadMoreButtonWrapper.style.display = "block";
             } else {
                 projectsArray.forEach(item => container.appendChild(item));
             }
@@ -269,7 +304,11 @@ const projectCounts = projects.reduce((acc, project) => {
             const newCategory = categoryFilter.value;
             const newYear = yearFilter.value;
             const newSort = sortFilter.value;
+            const newAmount = 5;
             const newUrl = new URL(window.location);
+
+            if (newAmount === 5) newUrl.searchParams.delete("amount");
+            else newUrl.searchParams.set("amount", newAmount);
 
             if (newCategory === 'all') newUrl.searchParams.delete("category");
             else newUrl.searchParams.set("category", newCategory);
@@ -277,15 +316,18 @@ const projectCounts = projects.reduce((acc, project) => {
             if (newYear === 'all') newUrl.searchParams.delete("year");
             else newUrl.searchParams.set("year", newYear);
 
-            if (newSort === 'newest') newUrl.searchParams.delete("sort");
+            if (newSort === 'Spotlight') newUrl.searchParams.delete("sort");
             else newUrl.searchParams.set("sort", newSort);
 
             newUrl.hash = 'projects';
-
             window.location.href = newUrl.toString();
             filterProjects(newCategory, newYear, newSort);
 
-            resetFilterButton.style.display = (newCategory !== "all" || newYear !== "all" || newSort !== "newest") ? "inline-block" : "none";
+            const shouldShowReset =
+                newCategory !== "all" ||
+                newYear !== "all" ||
+                (newSort !== "Spotlight" && newSort !== "newest");
+            resetFilterButton.style.display = shouldShowReset ? "inline-block" : "none";
         }
 
         filterProjects(selectedCategory, selectedYear, selectedSort);
@@ -303,6 +345,7 @@ const projectCounts = projects.reduce((acc, project) => {
             newUrl.searchParams.delete("category");
             newUrl.searchParams.delete("year");
             newUrl.searchParams.delete("sort");
+            newUrl.searchParams.delete("amount");
             window.location.href = newUrl.toString();
 
             filterProjects("all", "all", "newest");
@@ -313,7 +356,36 @@ const projectCounts = projects.reduce((acc, project) => {
             sortFilter.dispatchEvent(new Event("change"));
         });
 
-        if (selectedCategory !== 'all' || selectedYear !== 'all' || selectedSort !== 'newest') {
+        document.querySelector(".loadMoreButtonWrapper a")?.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+
+            amount += 5;
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set("amount", amount);
+            window.location.href = newUrl.toString();
+        });
+
+        window.addEventListener('load', function () {
+            const anchor = window.location.hash;
+
+            if (scrollPosition > 0) {
+                window.scrollTo(0, scrollPosition);
+            } else if (anchor) {
+                const element = document.querySelector(anchor);
+                if (element) {
+                    element.scrollIntoView({behavior: 'smooth'});
+                }
+            }
+            sessionStorage.removeItem('scrollPosition');
+        });
+
+        if (
+            selectedCategory !== 'all' ||
+            selectedYear !== 'all' ||
+            (selectedSort !== 'Spotlight' && selectedSort !== 'newest')
+        ) {
             resetFilterButton.style.display = 'inline-block';
         }
     });

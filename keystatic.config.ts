@@ -20,12 +20,17 @@ export default config({
             path: 'src/content/projects/*',
             slugField: 'title',
             format: {data: 'json'},
-            columns: ['title', 'date', 'category', 'visible'],
+            columns: ['title', 'date', 'category', 'visible', 'spotlight'],
             schema: {
                 visible: fields.checkbox({
                     label: 'Visible',
                     description: 'Set this project as visible to publish it.',
                     defaultValue: true,
+                }),
+                spotlight: fields.checkbox({
+                    label: 'Spotlight',
+                    description: 'Is this project a spotlight project?',
+                    defaultValue: false,
                 }),
                 title: fields.slug({
                     name: {
