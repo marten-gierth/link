@@ -7,7 +7,16 @@ import Footer from "../components/Footer.astro";
 <html lang="de">
 <head>
     <Head title={title} description={description} url={url} image={image}/>
-    <script type="module" src="/scripts/disableDevtool.js"></script>
+    <script>
+        if (import.meta.env.MODE === 'production') {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/disable-devtool';
+            script.setAttribute('disable-devtool-auto', '');
+            document.head.appendChild(script);
+        } else {
+            console.log("Devtools are enabled in development mode");
+        }
+    </script>
 </head>
 <body>
 <main>
