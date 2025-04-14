@@ -1,5 +1,6 @@
 ---
 import Project from "../components/project.astro";
+import ChipLink from "./ChipLink.astro";
 const projectFiles = import.meta.glob('/src/content/projects/*.json');
 const projects = await Promise.all(
     Object.values(projectFiles).map((file) => file().then((module) => module.default))
@@ -90,6 +91,14 @@ const projectCounts = projects.reduce((acc, project) => {
     ))}
 </div>
 
+<div class="loadMoreButtonWrapper">
+    <ChipLink
+            chipType="load more"
+            chipTypeColor="#E60000"
+            chipText="Projects"
+            url="?sort=newest#projects"
+    />
+</div>
 
 <style>
     select, button {
@@ -180,6 +189,14 @@ const projectCounts = projects.reduce((acc, project) => {
         white-space: nowrap;
     }
 
+    .loadMoreButtonWrapper {
+        visibility: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
 </style>
 
 <script>
@@ -236,7 +253,14 @@ const projectCounts = projects.reduce((acc, project) => {
             // Apply sorted elements back into DOM
             const container = document.getElementById("project-list");
             container.innerHTML = "";
-            projectsArray.forEach(item => container.appendChild(item));
+            const loadMoreButtonWrapper = document.querySelector(".loadMoreButtonWrapper");
+
+            if (Array.from(new URLSearchParams(window.location.search).entries()).length === 0) {
+                projectsArray.slice(0, 3).forEach(item => container.appendChild(item));
+                loadMoreButtonWrapper.style.visibility = "visible";
+            } else {
+                projectsArray.forEach(item => container.appendChild(item));
+            }
 
             noProjectsMessage.style.display = visibleProjects === 0 ? "block" : "none";
         }
@@ -255,6 +279,8 @@ const projectCounts = projects.reduce((acc, project) => {
 
             if (newSort === 'newest') newUrl.searchParams.delete("sort");
             else newUrl.searchParams.set("sort", newSort);
+
+            newUrl.hash = 'projects';
 
             window.location.href = newUrl.toString();
             filterProjects(newCategory, newYear, newSort);
