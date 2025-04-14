@@ -199,7 +199,7 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
         margin-top: 1rem;
     }
 
-    .loadButtonWrapper{
+    .loadButtonWrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -300,7 +300,9 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             const newSort = sortFilter.value;
             const newAmount = 5;
             const newUrl = new URL(window.location);
-            newUrl.searchParams.set("amount", newAmount);
+
+            if (newAmount === 5) newUrl.searchParams.delete("amount");
+            else newUrl.searchParams.set("amount", newAmount);
 
             if (newCategory === 'all') newUrl.searchParams.delete("category");
             else newUrl.searchParams.set("category", newCategory);
@@ -364,10 +366,8 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             const anchor = window.location.hash;
 
             if (scrollPosition > 0) {
-                // Wenn scrollPosition größer als 0 ist, immer zu dieser Position scrollen
                 window.scrollTo(0, scrollPosition);
             } else if (anchor) {
-                // Andernfalls, wenn ein Anker vorhanden ist, zum Anker scrollen
                 const element = document.querySelector(anchor);
                 if (element) {
                     element.scrollIntoView({behavior: 'smooth'});
