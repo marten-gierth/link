@@ -3,6 +3,8 @@
   "spotlight": false,
   "title": "Pearl Hyper Cars",
   "date": "2023-10-18",
+  "description": "A cinematic toy car ad, crafted in a three-day challenge for the fictional project PEARL. Inspired by over-the-top childhood toy commercials, it’s a high-energy ride—dramatic, fast-paced, and just a little too epic for a tiny car.",
+  "image": "/assets/projects/pearl-hyper-cars/image.jpg",
   "category": [
     "Video"
   ],
@@ -12,8 +14,6 @@
     "Challenge",
     "University project"
   ],
-  "description": "A cinematic toy car ad, crafted in a three-day challenge for the fictional project PEAL. Inspired by over-the-top childhood toy commercials, it’s a high-energy ride—dramatic, fast-paced, and just a little too epic for a tiny car.",
-  "image": "/assets/projects/pearl-hyper-cars/image.jpg",
   "collaborations": [
     {
       "name": "Ragnar Schott",
