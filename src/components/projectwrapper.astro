@@ -83,6 +83,16 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
     ))}
 </div>
 
+<div class="loadFilterButtonWrapper">
+    <ChipLink
+            chipType="Filter"
+            chipTypeColor="#E60000"
+            chipText="load more"
+            url="?sort=newest#projects"
+    />
+</div>
+
+
 <div class="loadMoreButtonWrapper">
     <ChipLink
             chipType=""
@@ -181,7 +191,7 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
         white-space: nowrap;
     }
 
-    .loadMoreButtonWrapper {
+    .loadMoreButtonWrapper, .loadFilterButtonWrapper {
         visibility: hidden;
         display: flex;
         justify-content: center;
@@ -257,9 +267,15 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             const container = document.getElementById("project-list");
             container.innerHTML = "";
             const loadMoreButtonWrapper = document.querySelector(".loadMoreButtonWrapper");
+            const loadFilterButtonWrapper = document.querySelector(".loadFilterButtonWrapper");
 
             if (Array.from(new URLSearchParams(window.location.search).entries()).length === 0) {
-                projectsArray.slice(0, 3).forEach(item => container.appendChild(item));
+                loadFilterButtonWrapper.style.visibility = "visible";
+            }
+
+
+            if (projectsArray.length > 5) {
+                projectsArray.slice(0, 5).forEach(item => container.appendChild(item));
                 loadMoreButtonWrapper.style.visibility = "visible";
             } else {
                 projectsArray.forEach(item => container.appendChild(item));
