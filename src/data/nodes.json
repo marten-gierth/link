@@ -10,9 +10,9 @@
 
 
     { "id": 100, "radius": 14, "label": "projects", "link": "#projects"},
-    { "id": 101, "radius": 10, "label": "game", "link": "?category=Game#projects"  },
-    { "id": 102, "radius": 12, "label": "video", "link": "?category=Video#projects"  },
-    { "id": 103, "radius": 10, "label": "photo", "link": "?category=Photography#projects" }
+    { "id": 101, "radius": 10, "label": "game", "link": "?sort=newest&category=Game#projects"  },
+    { "id": 102, "radius": 12, "label": "video", "link": "?sort=newest&category=Video#projects"  },
+    { "id": 103, "radius": 10, "label": "photo", "link": "?sort=newest&category=Photography#projects" }
 
   ],
   "links": [

@@ -2,6 +2,7 @@
 import ChipLink from "./ChipLink.astro";
 interface Props {
     visible?: boolean;
+    spotlight?: boolean;
     title?: string;
     projectTags?: string[];
     description?: string;
@@ -13,6 +14,7 @@ interface Props {
 
 const {
     visible = true,
+    spotlight = false,
     title = "",
     projectTags = [],
     description = "",

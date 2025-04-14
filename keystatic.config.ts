@@ -27,6 +27,11 @@ export default config({
                     description: 'Set this project as visible to publish it.',
                     defaultValue: true,
                 }),
+                spotlight: fields.checkbox({
+                    label: 'Spotlight',
+                    description: 'Is this project a spotlight project?',
+                    defaultValue: false,
+                }),
                 title: fields.slug({
                     name: {
                         label: 'Title',
