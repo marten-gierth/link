@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.4.0",
-    "@astrojs/markdoc": "^0.13.3",
+    "@astrojs/markdoc": "^0.14.0",
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/react": "^4.2.3",
     "@astrojs/sitemap": "^3.3.0",
