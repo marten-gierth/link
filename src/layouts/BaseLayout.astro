@@ -7,7 +7,9 @@ import Footer from "../components/Footer.astro";
 <html lang="de">
 <head>
     <Head title={title} description={description} url={url} image={image}/>
-    <script>
+    <script src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"></script>
+    <script id="usercentrics-cmp" src="https://web.cmp.usercentrics.eu/ui/loader.js" data-settings-id="Ba__uRyfiWmZEJ" async></script>
+<!--    <script>
         if (import.meta.env.MODE === 'production') {
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/disable-devtool';
@@ -16,7 +18,7 @@ import Footer from "../components/Footer.astro";
         } else {
             console.log("Devtools are enabled in development mode");
         }
-    </script>
+    </script>-->
 </head>
 <body>
 <main>
