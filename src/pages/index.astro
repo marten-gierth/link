@@ -7,22 +7,43 @@ import ThemeIcon from '../components/ThemeIcon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Projectwrapper from "../components/projectwrapper.astro";
 import SvgShipWaves from '../components/SvgShipWaves.astro';
+import SplitText from "../components/SplitText";
+const handleAnimationComplete = () => {
+    console.log('All letters have animated!');
+};
 ---
 <BaseLayout title="Marten Gierth | Portfolio">
     <div class="cta-container-top">
+        <div>
+            <ThemeIcon/>
+        </div>
+        <div>
         <ChipLink chipType="Let's connect" chipTypeColor="#212121" chipText="on LinkedIn" url="https://www.linkedin.com/in/marten-gierth/"
                   urlNewTab={true} iconRight="/assets/arrow-right.svg"/>
+        </div>
     </div>
     <div class="censored-container">
         <D3Force client:only="react" graph={graph}/>
-        <h1>Moin, I am Marten</h1>
+        <h1>
+            <SplitText client:only="react"
+                       text="Moin, I am Marten"
+                       className="h1"
+                       delay={20}
+                       duration={3}
+                       ease = elastic.out (1, 0.3),
+                       splitType="chars"
+                       from={{opacity: 0, y: 40}}
+                       to={{opacity: 1, y: 0}}
+                       threshold={0.1}
+                       rootMargin="-100px"
+                       textAlign="center"
+                       onLetterAnimationComplete={handleAnimationComplete}
+            />
+        </h1>
         <div class="linkContainer">
             <div>
                 <ChipLink chipType="Take a look at" chipTypeColor="#E60000" chipText="my Projects" url="#projects"
                           iconRight="/assets/arrow-right.svg"/>
-            </div>
-            <div>
-                <ThemeIcon/>
             </div>
         </div>
         <SvgShipWaves/>
@@ -44,14 +65,7 @@ import SvgShipWaves from '../components/SvgShipWaves.astro';
         justify-content: right;
         margin-top: 1rem;
         margin-right: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    .h1 {
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1rem;
+        gap: 0.5rem ;
     }
 
     .censored-container {
@@ -65,14 +79,8 @@ import SvgShipWaves from '../components/SvgShipWaves.astro';
     .linkContainer {
         display: flex;
         justify-content: center;
-        margin-top: 2rem;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 4rem;
-    }
-
-    .linkContainer div {
-        margin-top: 1rem;
     }
 
     .projectwrapper {
