@@ -75,7 +75,8 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             <div class="project-item"
                  data-categories={Array.isArray(project.category) ? project.category.join(',') : 'other'}
                  data-year={new Date(project.date).getFullYear()}
-                 data-spotlight={project.spotlight ? "true" : "false"}>
+                 data-spotlight={project.spotlight ? "true" : "false"}
+                 data-date={project.date}>
                 <Project
                         visible={project.visible}
                         title={project.title}
@@ -270,8 +271,8 @@ const years = Array.from(new Set(projects.map((p) => convertDate(p.date).getFull
             projectsArray.sort((a, b) => {
                 const titleA = a.querySelector("h2")?.innerText.toLowerCase() || "";
                 const titleB = b.querySelector("h2")?.innerText.toLowerCase() || "";
-                const dateA = new Date(a.dataset.year).getTime();
-                const dateB = new Date(b.dataset.year).getTime();
+                const dateA = new Date(a.dataset.date).getTime();
+                const dateB = new Date(b.dataset.date).getTime();
 
                 // Sorting logic based on the selected sort option
                 if (sort === "az") return titleA.localeCompare(titleB);  // Alphabetical A-Z
