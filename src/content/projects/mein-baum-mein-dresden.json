@@ -1,0 +1,31 @@
+{
+  "visible": true,
+  "spotlight": false,
+  "title": "Mein Baum Mein Dresden",
+  "date": "2023-06-08",
+  "description": "A Image Film I created for the initiative Mein Baum – Mein Dresden during my Voluntary Ecological Year at Wilderness International.",
+  "image": "/assets/projects/mein-baum-mein-dresden/image.jpg",
+  "category": [
+    "Video"
+  ],
+  "projectTags": [
+    "Video",
+    "Image Film",
+    "Voice Over"
+  ],
+  "collaborations": [],
+  "links": [
+    {
+      "chipType": "Youtube",
+      "chipColor": "#FF0000",
+      "chipText": "Watch",
+      "url": "https://youtu.be/A5DlIzUJAmw"
+    },
+    {
+      "chipType": "Website",
+      "chipText": "Visit",
+      "url": "https://meinbaum-meindresden.org/"
+    }
+  ],
+  "imagelink": "https://youtu.be/A5DlIzUJAmw"
+}
