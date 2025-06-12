@@ -1,8 +1,10 @@
 {
   "visible": true,
-  "spotlight": false,
+  "spotlight": true,
   "title": "Pearl Western Style",
   "date": "2023-10-18",
+  "description": "A cinematic fragrance ad, created in a three-day challenge for the fictional project Pearl. Filmed in a retired bank vault.",
+  "image": "/assets/projects/pearl-western-style/image.jpg",
   "category": [
     "Video"
   ],
@@ -12,8 +14,6 @@
     "Challenge",
     "University project"
   ],
-  "description": "A cinematic fragrance ad, created in a three-day challenge for the fictional project Pearl. Filmed in a retired bank vault.",
-  "image": "/assets/projects/pearl-western-style/image.jpg",
   "collaborations": [
     {
       "name": "Ragnar Schott",
